@@ -19,7 +19,7 @@
       --muted:     #888;
       --card-w:    260px;
       --radius:    10px;
-      --footer-h:  220px;
+      --footer-h:  0px;
     }
 
     /* ── RESET ──────────────────────────────────────────── */
@@ -135,6 +135,62 @@
     .filter-select.active { border-color: var(--accent); color: var(--accent); }
     .filter-select option { background: var(--bg3); color: var(--text); }
 
+    #filter-clear {
+        padding: 0.25rem 0.35rem;
+        border-radius: 6px;
+        border: 1px solid var(--accent);
+        background: transparent;
+        color: var(--accent);
+        font-family: 'Barlow', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      #filter-clear:hover {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .checkbox-dropdown {
+        display: none;
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 0.5rem 0;
+        z-index: 200;
+        min-width: 160px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      }
+      .checkbox-dropdown.open {
+        display: block;
+      }
+      .checkbox-dropdown label {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.4rem 0.85rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+        cursor: pointer;
+        transition: color 0.15s;
+      }
+      .checkbox-dropdown label:hover {
+        color: var(--text);
+      }
+      .checkbox-dropdown input[type="checkbox"] {
+        accent-color: var(--accent);
+        cursor: pointer;
+      }
+
     /* ── MAIN LAYOUT ────────────────────────────────────── */
     main {
       max-width: 1200px;
@@ -142,7 +198,7 @@
       display: grid;
       grid-template-columns: var(--card-w) 1fr;
       gap: 0;
-      min-height: calc(100vh - 90px - var(--footer-h));
+      min-height: calc(100vh - 90px);
     }
 
     /* ── SIDEBAR ────────────────────────────────────────── */
@@ -151,7 +207,7 @@
       padding: 1.5rem 0;
       position: sticky;
       top: 90px;
-      height: calc(100vh - 90px - var(--footer-h));
+      height: calc(100vh - 90px);
       overflow-y: auto;
     }
     #sidebar::-webkit-scrollbar { width: 4px; }
@@ -220,7 +276,7 @@
     #detail {
       padding: 2.5rem 3rem;
       overflow-y: auto;
-      height: calc(100vh - 90px - var(--footer-h));
+      height: calc(100vh - 90px);
     }
     #detail::-webkit-scrollbar { width: 6px; }
     #detail::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
@@ -377,13 +433,11 @@
     footer {
       border-top: 1px solid var(--border);
       background: var(--bg2);
-      min-height: var(--footer-h);
-      {{/*  overflow: hidden;  */}}
     }
     .footer-inner {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0.50rem 2rem;
+      padding: 1.50rem 2rem;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 0;
@@ -459,16 +513,60 @@
         grid-template-columns: 1fr;
         grid-template-rows: auto 1fr;
       }
+      header {
+        position: relative;
+        z-index: 200;
+        padding: 2rem 1rem 1.5rem;
+      } 
+      .header-inner {
+        gap: 0.5rem;
+        padding: 0.75rem 1rem;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .logo {
+        font-size: 1.4rem;
+        flex-shrink: 0;
+      }
+      .logo small {
+        font-size: 0.5em;
+      }
+      .search-wrap {
+        flex: 1;
+        min-width: 0;
+        max-width: 100%;
+        order: 3;
+        width: 100%;
+      }
+      .filters {
+        order: 4;
+        margin-left: 0;
+        width: 100%;
+        gap: 0.4rem;
+      }
+      .filter-select {
+        font-size: 0.75rem;
+        padding: 0.35rem 1.75rem 0.35rem 0.65rem;
+        flex: 1;
+      }
+      .detail-icon, .difficulty-dot {
+        display: none;
+      }
+      .checkbox-dropdown {
+        z-index: 300;
+      }
 
       @media (max-width: 768px) {
         #sidebar {
-          position: static;
+          position: sticky;
+          top: 0;
+          z-index: 80;
           height: auto;
           border-right: none;
           border-bottom: 1px solid var(--border);
           padding: 0.5rem 0;
           display: block;
-          overflow: hidden;
+          background: var(--bg);
         }
         .monster-count { padding: 0 1rem 0.5rem; }
         #monster-list {
@@ -496,7 +594,7 @@
           gap: 0.3rem;
         }
         .monster-card.active {
-          border-bottom-color: var(--accent);
+          border-bottom-color: var(----text);
           background: var(--bg2);
         }
         .monster-icon { font-size: 2rem; }
@@ -512,7 +610,20 @@
       }
       .detail-header { flex-wrap: wrap; }
       footer { height: auto; }
-      .footer-inner { grid-template-columns: 1fr; height: auto; }
+      .footer-inner { 
+        grid-template-columns: 1fr; 
+        height: auto; 
+        padding: 1rem;
+      }
+      .footer-section {
+        padding: 1rem 0;
+        border-right: none !important;
+        border-left: none !important;
+        border-top: 1px solid var(--border);
+      }
+      .footer-section:first-child {
+        border-top: none;
+      }
       .footer-divider { display: none; }
     }
   </style>
@@ -524,32 +635,33 @@
 <div id="app" style="display:none">
   <header>
     <div class="header-inner">
-      <a class="logo" href="#" id="home-btn">King of <span>Guide</span><br><small style="font-size:0.55em;letter-spacing:0.15em;color:var(--muted)">Tokyo Monsters</small></a>
+      <a class="logo" href="#" id="home-btn">King of <span>Guide</span><br><small style="font-size:0.55em;letter-spacing:0.15em;color:var(--muted)"><span style="color:var(--accent);opacity:70%">Tokyo</span> Monsters</small></a>
       <div class="search-wrap">
         <span class="search-icon">🔍</span>
         <input id="search" type="text" placeholder="Search monsters, playstyles, tips…" autocomplete="off" />
       </div>
       <div class="filters" id="filters">
+        <button id="filter-clear" style="display:none">↺</button>
         <div class="filter-select-wrap">
           <select class="filter-select" id="filter-difficulty">
-            <option value="all">All Difficulties</option>
+            <option value="all">All Skills</option>
             <option value="Beginner">Beginner</option>
             <option value="Intermediate">Intermediate</option>
             <option value="Advanced">Advanced</option>
           </select>
         </div>
-        <div class="filter-select-wrap">
-          <select class="filter-select" id="filter-playstyle">
-            <option value="all">All Playstyles</option>
-            <option value="Scorer">Scorer</option>
-            <option value="Smasher">Smasher</option>
-            <option value="Harvester">Harvester</option>
-            <option value="Defender">Defender</option>
-            <option value="Disruptor">Disruptor</option>
-            <option value="Collector">Collector</option>
-            <option value="Tanker">Tanker</option>
-            <option value="Climber">Climber</option>
-          </select>
+        <div class="filter-select-wrap" id="playstyle-wrap">
+          <button class="filter-select" id="playstyle-toggle">All Playstyles</button>
+          <div class="checkbox-dropdown" id="playstyle-dropdown">
+            <label><input type="checkbox" value="Scorer"> Scorer</label>
+            <label><input type="checkbox" value="Smasher"> Smasher</label>
+            <label><input type="checkbox" value="Harvester"> Harvester</label>
+            <label><input type="checkbox" value="Defender"> Defender</label>
+            <label><input type="checkbox" value="Disruptor"> Disruptor</label>
+            <label><input type="checkbox" value="Collector"> Collector</label>
+            <label><input type="checkbox" value="Tanker"> Tanker</label>
+            <label><input type="checkbox" value="Climber"> Climber</label>
+          </div>
         </div>
       </div>
     </div>
@@ -563,7 +675,7 @@
     <section id="detail">
       <div class="empty-state">
         <div class="big-icon">👑</div>
-        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The Monster Guide</h2>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The <br><span style="color:var(--accent)">King of Tokyo Monster Guide</span></h2>
         <p style="font-style:italic;color:var(--muted);margin-bottom:1.25rem;">Your companion for mastering every monster in King of Tokyo.</p>
         <p style="max-width:400px;">Use this guide to explore each monster's playstyle, evolution cards, strengths, and strategies — whether you're picking up a monster for the first time or looking to sharpen your game.</p>
         <ul style="list-style:none;padding:0;margin:1rem 0;text-align:left;display:flex;flex-direction:column;gap:0.4rem;">
@@ -571,7 +683,7 @@
           <li>🎯 <strong>Filter</strong> by difficulty to find the right fit.</li>
           <li>📖 <strong>Select</strong> any monster to read their full guide.</li>
         </ul>
-        <p style="color:var(--muted);font-style:italic;margin-top:0.5rem;">Select a monster on the left to get started.</p>
+        <p style="color:var(--muted);font-style:italic;margin-top:0.5rem;">Select a monster to get started.</p>
       </div>
     </section>
   </main>
@@ -580,14 +692,14 @@
     <div class="footer-inner">
 
       <div class="footer-section">
-        <h4>Difficulty</h4>
+        <h4 style="margin-top:0.9rem">Contribute</h4>
+        <p>This guide is open source and community driven. Found an error, want to add a monster, or improve a guide? <br><a href="https://github.com/kingofguide/tokyo" target="_blank" style="color:var(--text);text-decoration:none;font-weight:600;">View on GitHub →</a></p>
+        <h4 style="margin-top:0.9rem">Difficulty</h4>
         <ul>
           <li><span class="footer-key">Beginner</span><span>— Playable your first game</span></li>
           <li><span class="footer-key">Intermediate</span><span>— Takes ~2 games to click</span></li>
           <li><span class="footer-key">Advanced</span><span>— Takes ~3+ games to master</span></li>
         </ul>
-        <h4 style="margin-top:0.9rem">Combo</h4>
-        <p>Card, Power, and Tile synergies that amplify a monster's strengths — shown in each guide under <em>Best Evolution Combos</em> and <em>Card Priorities</em>.</p>
       </div>
 
       <div class="footer-divider"></div>
@@ -611,7 +723,9 @@
       <div class="footer-section">
         <h4>About</h4>
         <p>A fan-made guide for <em>King of Tokyo</em> monsters. Stats and playstyle ratings are community-assessed, not official values.</p>
+        <p style="margin-top:0.5rem">Guide content and code was generated with the assistance of AI. All content is reviewed and curated by the site's author.</p>
         <p style="margin-top:0.5rem">King of Tokyo is designed by Richard Garfield and published by IELLO.</p>
+        <p style="margin-top:0.5rem">© 2025 King of Guide. All rights reserved.</p>
       </div>
 
     </div>
@@ -625,7 +739,7 @@
   let activeId    = null;
   let searchQuery = '';
   let filterDifficulty = 'all';
-  let filterPlaystyle  = 'all';
+  let filterPlaystyles = [];
 
   // ── FETCH DATA ─────────────────────────────────────────
   fetch('data.json')
@@ -646,7 +760,7 @@
     return allMonsters.filter(m => {
       const matchDifficulty = filterDifficulty === 'all' || m.difficulty === filterDifficulty;
       const playstyleArr = Array.isArray(m.playstyle) ? m.playstyle : [m.playstyle].filter(Boolean);
-      const matchPlaystyle = filterPlaystyle === 'all' || playstyleArr.includes(filterPlaystyle);
+      const matchPlaystyle = filterPlaystyles.length === 0 || filterPlaystyles.every(p => playstyleArr.includes(p));
       if (!matchDifficulty || !matchPlaystyle) return false;
       if (!searchQuery) return true;
       const q = searchQuery.toLowerCase();
@@ -666,7 +780,7 @@
     const list = document.getElementById('monster-list');
     const count = document.getElementById('monster-count');
 
-    count.textContent = `${monsters.length} monster${monsters.length !== 1 ? 's (and counting)' : ''}`;
+    count.textContent = `${monsters.length} monster${monsters.length !== 1 ? 's' : ''}`;
 
     if (!monsters.length) {
       list.innerHTML = '<div class="no-results">No monsters match your search.</div>';
@@ -745,18 +859,7 @@
     renderList();
   });
 
-  document.getElementById('filter-difficulty').addEventListener('change', e => {
-    filterDifficulty = e.target.value;
-    e.target.classList.toggle('active', filterDifficulty !== 'all');
-    renderList();
-  });
 
-  document.getElementById('filter-playstyle').addEventListener('change', e => {
-    filterPlaystyle = e.target.value;
-    e.target.classList.toggle('active', filterPlaystyle !== 'all');
-    renderList();
-  });
-  
   document.getElementById('home-btn').addEventListener('click', e => {
   e.preventDefault();
   activeId = null;
@@ -764,7 +867,7 @@
   document.getElementById('detail').innerHTML = `
       <div class="empty-state">
         <div class="big-icon">👑</div>
-        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The Monster Guide</h2>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The <br><span style="color:var(--accent)">King of Tokyo Monster Guide</span></h2>
         <p style="font-style:italic;color:var(--muted);margin-bottom:1.25rem;">Your companion for mastering every monster in King of Tokyo.</p>
         <p style="max-width:400px;">Use this guide to explore each monster's playstyle, evolution cards, strengths, and strategies — whether you're picking up a monster for the first time or looking to sharpen your game.</p>
         <ul style="list-style:none;padding:0;margin:1rem 0;text-align:left;display:flex;flex-direction:column;gap:0.4rem;">
@@ -772,10 +875,63 @@
           <li>🎯 <strong>Filter</strong> by difficulty to find the right fit.</li>
           <li>📖 <strong>Select</strong> any monster to read their full guide.</li>
         </ul>
-        <p style="color:var(--muted);font-style:italic;margin-top:0.5rem;">Select a monster on the left to get started.</p>
+        <p style="color:var(--muted);font-style:italic;margin-top:0.5rem;">Select a monster to get started.</p>
       </div>
-  `;
-});
+    `;
+  });
+
+  function updateClearButton() {
+  const btn = document.getElementById('filter-clear');
+  const active = filterDifficulty !== 'all' || filterPlaystyles.length > 0;
+  btn.style.display = active ? 'block' : 'none';
+  }
+
+  document.getElementById('filter-clear').addEventListener('click', () => {
+    filterDifficulty = 'all';
+    filterPlaystyles = [];
+    document.getElementById('filter-difficulty').value = 'all';
+    document.getElementById('filter-difficulty').classList.remove('active');
+    playstyleDropdown.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    playstyleToggle.textContent = 'All Playstyles';
+    playstyleToggle.classList.remove('active');
+    document.getElementById('filter-clear').style.display = 'none';
+    renderList();
+  });
+
+  document.getElementById('filter-difficulty').addEventListener('change', e => {
+    filterDifficulty = e.target.value;
+    e.target.classList.toggle('active', filterDifficulty !== 'all');
+    renderList();
+    updateClearButton();
+  });
+
+const playstyleToggle = document.getElementById('playstyle-toggle');
+const playstyleDropdown = document.getElementById('playstyle-dropdown');
+
+playstyleToggle.addEventListener('click', e => {
+  e.stopPropagation();
+  playstyleDropdown.classList.toggle('open');
+  });
+
+  document.addEventListener('click', e => {
+    if (!document.getElementById('playstyle-wrap').contains(e.target)) {
+      playstyleDropdown.classList.remove('open');
+    }
+  });
+
+  playstyleDropdown.addEventListener('change', e => {
+    if (e.target.type === 'checkbox') {
+      filterPlaystyles = Array.from(
+        playstyleDropdown.querySelectorAll('input[type="checkbox"]:checked')
+      ).map(cb => cb.value);
+
+      const count = filterPlaystyles.length;
+      playstyleToggle.textContent = count === 0 ? 'All Playstyles' : `${count} Playstyle${count > 1 ? 's' : ''}`;
+      playstyleToggle.classList.toggle('active', count > 0);
+      renderList();
+      updateClearButton();
+    }
+  });
 </script>
 </body>
 </html>
