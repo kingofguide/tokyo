@@ -78,17 +78,11 @@ The most powerful disruption card in the kit. Strips all rerolls from every oppo
 - **Blizzard** is the best closer. Locking rerolls and forcing a Tokyo hold means a weak occupant can't escape punishment.
 - Watch for **Miraculous Catch** value when the discard pile is full of expensive cards others passed on.
 
-### Best Evolution Combos
+### Evolution Combos
 - **Icy Reflection + any strong permanent** — copying a top-tier evolution from another monster gives VP generation or damage output that was never earned independently.
 - **Cold Wave + Blizzard** — play both in the same round for a full dice lockdown. Opponents get one roll with one fewer die and no rerolls.
 - **Freeze Ray + Encased in Ice** — debuff the Tokyo occupant's dice while locking in your best result before rerolling.
 - **Black Diamond + Blizzard** — force the Tokyo occupant to stay put, then grab Tokyo for the bonus VP.
-
-### Card Priorities
-1. **Freeze Time** — stalling opponents while disruption compounds is extremely powerful
-2. **Apartment Building** — converts energy advantage into VP efficiently
-3. **Herd Culler** — cheap damage that keeps opponents' health low for Blizzard finishes
-4. **Background Dweller** — staying out of Tokyo safely while accumulating energy suits the patient gameplan
 
 ## Common Mistakes
 - Using **Icy Reflection** on a weak evolution just because it's available, wait for something genuinely powerful

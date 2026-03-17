@@ -77,17 +77,11 @@ A massive burst damage card. Every monster hit this turn takes 2 bonus damage. S
 - **Programmed to Destroy** makes finishing off weakened monsters a priority. Each kill pays 3 VP and 2 energy.
 - Hold **Mecha Blast** for a turn where multiple opponents are low. The 2 bonus damage per target is devastating at that point.
 
-### Best Evolution Combos
+### Evolution Combos
 - **Target Acquired + Claws of Steel + Mecha Blast** — mark a target, guarantee the threshold bonus, then play Mecha Blast for a turn that deals massive bonus damage to the marked target.
 - **Breath of Doom + Claws of Steel** — hit Tokyo hard enough to trigger the threshold and every outside monster takes 1 damage too.
 - **Lightning Armor + Programmed to Destroy** — sit in Tokyo, reflect damage back, collect 3 VP and 2 energy per kill.
 - **Destructive Analysis + any high-claw turn** — convert aggression directly into energy then spend it immediately.
-
-### Card Priorities
-1. **Apartment Building** — converts energy advantage into VP efficiently
-2. **Nova Breath** — stacks with Breath of Doom for extra board pressure
-3. **Acid Attack** — persistent damage that compounds over time
-4. **Eater of the Dead** — pairs with Programmed to Destroy in attrition games
 
 ## Common Mistakes
 - Buying expensive cards before the energy engine is established

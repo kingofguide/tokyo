@@ -80,7 +80,7 @@ Hold it until you are 2 VP from winning and close out cleanly.
 - Hold **Alien Scourge** until you are exactly 2 VP from winning.
 - **Exotic Arms** is safer to gamble with once you have a large energy buffer built up.
 
-### Best Evolution Combos
+### Evolution Combos
 - **Anger Batteries + Exotic Arms** — take damage, refuel, then bet the energy on a big claw turn.
 - **Superior Alien Technology + Precision Field Support** — half-price buys and a free card in the same round.
 - **Mothership Support + Funny Looking But Dangerous** — heal passively while dealing chip damage every turn.

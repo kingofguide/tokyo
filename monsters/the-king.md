@@ -77,16 +77,10 @@ An instant Tokyo grab triggered by someone else's misfortune. Hold this in hand 
 - With **Twas Beauty Killed the Beast** and **I Am the King!** both active, VP is generating passively every round. Play defensively and let the clock win.
 - **Jungle Frenzy** is a strong closer. A bonus turn when near 20 VP can end the game immediately.
 
-### Best Evolution Combos
+### Evolution Combos
 - **Twas Beauty Killed the Beast + I Am the King! + Alpha Male** — VP from three sources every round. Opponents must respond immediately or lose the VP race entirely.
 - **Chest Thumping + Monkey Rush** — force anyone out of Tokyo with claws then instantly reclaim it. Near-permanent Tokyo control.
 - **Twas Beauty Killed the Beast + Simian Scamper** — accumulate VP safely in Tokyo with Simian Scamper as the escape hatch that costs no health on the way out.
-
-### Card Priorities
-1. **Regeneration** — keeps Tokyo stays longer and protects the VP stack
-2. **Even Bigger** — extra health extends Tokyo stays significantly
-3. **Armor Plating** — reduces incoming damage making it harder to force out
-4. **Domination** — closes out the VP race faster when already ahead
 
 ## Common Mistakes
 - Activating **Twas Beauty Killed the Beast** too early without health insurance, losing all accumulated stars to a forced yield is catastrophic

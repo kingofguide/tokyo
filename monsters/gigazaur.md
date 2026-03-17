@@ -79,15 +79,10 @@ A get-out-of-jail card. Use it on a turn where heavy incoming damage is expected
 - Commit fully to eliminating a wounded monster. Partial damage just lets them heal.
 - Hold **Primal Bellow** and **Detachable Tail** for the final push.
 
-### Best Evolution Combos
+### Evolution Combos
 - **Gamma Breath + Tail Sweep** — guaranteed claw plus flexible number conversion every turn. Consistent dice control.
 - **Defender of Tokyo + Detachable Tail** — stay in Tokyo, drain VP, take zero damage that turn.
 - **Saurian Adaptability + Defender of Tokyo** — convert a bad roll into a VP dice turn while the Tokyo passive bleeds opponents.
-
-### Card Priorities
-1. **Nova Breath** — hits everyone outside Tokyo, pairs perfectly with aggression
-2. **Extra Head** — doubles claw output
-3. **Complete Destruction** — closes out the board when ready
 
 ## Common Mistakes
 - Spreading damage across multiple targets instead of focusing one down

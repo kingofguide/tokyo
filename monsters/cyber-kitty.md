@@ -79,7 +79,7 @@ The most dramatic evolution card in the game. Instead of being eliminated, reset
 - Trigger **Nine Lives** at exactly 0 health, ideally when opponents are about to pile on. The instant 9 VP reset can flip the entire game.
 - **Cat Nip** is the best closer when health is stable. Doubling a strong natural roll can end the game in a single turn.
 
-### Best Evolution Combos
+### Evolution Combos
 - **Meow Missile + Mouse Hunter + Cat Nip** — double your dice with both one-triggers active for a turn that generates VP, claws, and raw dice value simultaneously.
 - **Play With Your Food + Feline Motor** — steal resources from Tokyo occupants with claws, then slide into Tokyo the moment they yield.
 - **Nine Lives + Electro-Scratch or Mega Purr** — after triggering Nine Lives at 9 VP, immediately play a resource grab or board ping to accelerate the closing push.
