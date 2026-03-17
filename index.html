@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>King of Tokyo — Monster Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --bg:        #0d0d12;
+      --bg2:       #14141c;
+      --bg3:       #1c1c28;
+      --border:    #2a2a3a;
+      --accent:    #ff9f1c;
+      --accent2:   #e4d71d;
+      --text:      #e8e8f0;
+      --muted:     #888;
+      --card-w:    260px;
+      --radius:    10px;
+      --footer-h:  220px;
+    }
+
+    /* ── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, #1a0e0a 0%, #0d0d12 60%);
+      border-bottom: 1px solid var(--text);
+      padding: 2rem 2rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      text-shadow: 0 0 20px rgba(230,57,70,0.4);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .logo span { color: var(--text); }
+    a.logo { text-decoration: none; cursor: pointer; }
+    .search-wrap {
+      flex: 1;
+      min-width: 200px;
+      max-width: 400px;
+      position: relative;
+    }
+    #search {
+      width: 100%;
+      padding: 0.55rem 1rem 0.55rem 2.6rem;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    #search:focus { border-color: var(--accent); }
+    #search::placeholder { color: var(--muted); }
+    .search-icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+
+    /* ── FILTERS ────────────────────────────────────────── */
+    .filters {
+      display: flex;
+      gap: 0.6rem;
+      margin-left: auto;
+      align-items: center;
+    }
+    .filter-select-wrap {
+      position: relative;
+    }
+    .filter-select-wrap::after {
+      content: '▾';
+      position: absolute;
+      right: 0.7rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      font-size: 0.75rem;
+      pointer-events: none;
+    }
+    .filter-select {
+      appearance: none;
+      -webkit-appearance: none;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.45rem 2rem 0.45rem 0.85rem;
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .filter-select:hover,
+    .filter-select:focus { border-color: var(--accent2); }
+    .filter-select.active { border-color: var(--accent); color: var(--accent); }
+    .filter-select option { background: var(--bg3); color: var(--text); }
+
+    /* ── MAIN LAYOUT ────────────────────────────────────── */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: var(--card-w) 1fr;
+      gap: 0;
+      min-height: calc(100vh - 90px - var(--footer-h));
+    }
+
+    /* ── SIDEBAR ────────────────────────────────────────── */
+    #sidebar {
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 0;
+      position: sticky;
+      top: 90px;
+      height: calc(100vh - 90px - var(--footer-h));
+      overflow-y: auto;
+    }
+    #sidebar::-webkit-scrollbar { width: 4px; }
+    #sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .monster-count {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      padding: 0 1.25rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0.5rem;
+    }
+
+    .monster-card {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.85rem 1.25rem;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+    }
+    .monster-card:hover { background: var(--bg2); }
+    .monster-card.active {
+      background: var(--bg2);
+      border-left-color: var(--accent);
+    }
+    .monster-icon { font-size: 1.8rem; line-height: 1; flex-shrink: 0; }
+    .monster-meta { min-width: 0; }
+    .monster-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .monster-playstyle {
+      font-size: 0.73rem;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .difficulty-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+    .difficulty-dot.Beginner     { background: #4caf50; }
+    .difficulty-dot.Intermediate { background: var(--accent2); }
+    .difficulty-dot.Advanced     { background: var(--accent); }
+
+    .no-results {
+      padding: 2rem 1.25rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    /* ── DETAIL PANEL ───────────────────────────────────── */
+    #detail {
+      padding: 2.5rem 3rem;
+      overflow-y: auto;
+      height: calc(100vh - 90px - var(--footer-h));
+    }
+    #detail::-webkit-scrollbar { width: 6px; }
+    #detail::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* Empty state */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: var(--muted);
+      text-align: center;
+      gap: 1rem;
+    }
+    .empty-state .big-icon { font-size: 4rem; opacity: 0.4; }
+    .empty-state p { font-size: 1.1rem; }
+
+    /* Monster detail header */
+    .detail-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .detail-icon { font-size: 4rem; line-height: 1; }
+    .detail-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      color: var(--text);
+    }
+    .detail-tagline {
+      color: var(--muted);
+      font-style: italic;
+      margin-top: 0.3rem;
+      font-size: 1rem;
+    }
+    .detail-tags {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .tag {
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .tag.difficulty.Beginner     { background: rgba(76,175,80,0.15);  color: #4caf50; border: 1px solid rgba(76,175,80,0.3); }
+    .tag.difficulty.Intermediate { background: rgba(255,159,28,0.15); color: var(--accent2); border: 1px solid rgba(255,159,28,0.3); }
+    .tag.difficulty.Advanced     { background: rgba(230,57,70,0.15);  color: var(--accent); border: 1px solid rgba(230,57,70,0.3); }
+    .tag.playstyle  { background: rgba(228, 215, 29, 0.12); color: #e5e5e5; border: 1px solid rgba(160,100,255,0.3); }
+    {{/*  .tag.type       { background: rgba(255, 159, 28, 0.12); color: #e5e5e5; border: 1px solid rgba(100,180,255,0.3); }  */}}
+    .tag.type { display: none; }
+
+    /* Stats bars */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+    .stat-row { display: flex; flex-direction: column; gap: 0.25rem; }
+    .stat-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .stat-bar-bg {
+      height: 6px;
+      background: var(--bg3);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .stat-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+    .stat-bar-fill.aggression { background: linear-gradient(90deg, #e63946, #ff6b78); }
+    .stat-bar-fill.resilience { background: linear-gradient(90deg, #4caf50, #81c784); }
+    .stat-bar-fill.energy     { background: linear-gradient(90deg, #2196f3, #64b5f6); }
+    .stat-bar-fill.speed      { background: linear-gradient(90deg, #ff9f1c, #ffcc70); }
+
+    /* Markdown content */
+    .detail-content h1,
+    .detail-content h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.05em;
+      margin: 2rem 0 0.75rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    .detail-content h1 { font-size: 1.8rem; }
+    .detail-content h2 { font-size: 1.5rem; }
+    .detail-content h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent2);
+      margin: 1.5rem 0 0.5rem;
+    }
+    .detail-content p { margin-bottom: 0.9rem; }
+    .detail-content strong { color: #fff; font-weight: 600; }
+    .detail-content em { color: #ccc; }
+    .detail-content code {
+      background: var(--bg3);
+      padding: 0.1em 0.4em;
+      border-radius: 3px;
+      font-size: 0.88em;
+    }
+    .detail-content ul,
+    .detail-content ol {
+      padding-left: 1.5rem;
+      margin-bottom: 0.9rem;
+    }
+    .detail-content li { margin-bottom: 0.3rem; }
+    .detail-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.2rem;
+      font-size: 0.9rem;
+    }
+    .detail-content th {
+      background: var(--bg3);
+      padding: 0.55rem 0.8rem;
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .detail-content td {
+      padding: 0.55rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .detail-content tr:last-child td { border-bottom: none; }
+    .detail-content tr:hover td { background: var(--bg2); }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg2);
+      min-height: var(--footer-h);
+      {{/*  overflow: hidden;  */}}
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.50rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      {{/*  height: 100%;  */}}
+    }
+    .footer-section {
+    padding: 0 2rem;
+    }
+    .footer-section:first-child {
+      padding-left: 0;
+      border-right: 1px solid var(--border);
+    }
+    .footer-section:last-child {
+      padding-right: 0;
+      border-left: 1px solid var(--border);
+    }
+    .footer-section h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+    }
+    .footer-section p,
+    .footer-section li {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .footer-section ul li { display: flex; gap: 0.4rem; align-items: baseline; }
+    .footer-key {
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      font-size: 0.78rem;
+    }
+    .footer-playstyles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.2rem 1rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-playstyles li { display: flex; gap: 0.4rem; align-items: baseline; font-size: 0.78rem; color: var(--muted); }
+    .footer-divider { display: none; }
+
+    /* ── LOADING / ERROR ────────────────────────────────── */
+    #loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 768px) {
+      :root { --footer-h: 0px; }
+      main {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+      }
+
+      @media (max-width: 768px) {
+        #sidebar {
+          position: static;
+          height: auto;
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+          padding: 0.5rem 0;
+          display: block;
+          overflow: hidden;
+        }
+        .monster-count { padding: 0 1rem 0.5rem; }
+        #monster-list {
+          display: flex;
+          flex-direction: row;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+          gap: 0.5rem;
+          padding: 0.25rem 1rem 0.75rem;
+          scrollbar-width: none;
+        }
+        #monster-list::-webkit-scrollbar { display: none; }
+        .monster-card {
+          flex: 0 0 auto;
+          width: 110px;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          padding: 0.75rem 0.5rem;
+          border-left: none;
+          border-bottom: 3px solid transparent;
+          border-radius: 8px;
+          scroll-snap-align: start;
+          gap: 0.3rem;
+        }
+        .monster-card.active {
+          border-bottom-color: var(--accent);
+          background: var(--bg2);
+        }
+        .monster-icon { font-size: 2rem; }
+        .monster-name { font-size: 0.85rem; white-space: normal; line-height: 1.2; }
+        .monster-playstyle { display: none; }
+        .difficulty-dot { margin: 0 auto; }
+        .monster-count { width: 100%; }
+      }
+      
+      #detail {
+        height: auto;
+        padding: 1.5rem 1.25rem;
+      }
+      .detail-header { flex-wrap: wrap; }
+      footer { height: auto; }
+      .footer-inner { grid-template-columns: 1fr; height: auto; }
+      .footer-divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="loading">Loading monsters…</div>
+
+<div id="app" style="display:none">
+  <header>
+    <div class="header-inner">
+      <a class="logo" href="#" id="home-btn">King of <span>Tokyo</span><br><small style="font-size:0.55em;letter-spacing:0.15em;color:var(--muted)">Monster Guide</small></a>
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input id="search" type="text" placeholder="Search monsters, playstyles, tips…" autocomplete="off" />
+      </div>
+      <div class="filters" id="filters">
+        <div class="filter-select-wrap">
+          <select class="filter-select" id="filter-difficulty">
+            <option value="all">All Difficulties</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+          </select>
+        </div>
+        <div class="filter-select-wrap">
+          <select class="filter-select" id="filter-playstyle">
+            <option value="all">All Playstyles</option>
+            <option value="Scorer">Scorer</option>
+            <option value="Smasher">Smasher</option>
+            <option value="Harvester">Harvester</option>
+            <option value="Defender">Defender</option>
+            <option value="Disruptor">Disruptor</option>
+            <option value="Collector">Collector</option>
+            <option value="Tanker">Tanker</option>
+            <option value="Climber">Climber</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav id="sidebar">
+      <div class="monster-count" id="monster-count"></div>
+      <div id="monster-list"></div>
+    </nav>
+    <section id="detail">
+      <div class="empty-state">
+        <div class="big-icon">👑</div>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The Monster Guide</h2>
+        <p style="font-style:italic;color:var(--muted);margin-bottom:1.25rem;">Your companion for mastering every monster in King of Tokyo.</p>
+        <p style="max-width:400px;">Use this guide to explore each monster's playstyle, evolution cards, strengths, and strategies — whether you're picking up a monster for the first time or looking to sharpen your game.</p>
+        <ul style="list-style:none;padding:0;margin:1rem 0;text-align:left;display:flex;flex-direction:column;gap:0.4rem;">
+          <li>🔍 <strong>Search</strong> monsters by name, playstyle, or keyword.</li>
+          <li>🎯 <strong>Filter</strong> by difficulty to find the right fit.</li>
+          <li>📖 <strong>Select</strong> any monster to read their full guide.</li>
+        </ul>
+        <p style="color:var(--muted);font-style:italic;margin-top:0.5rem;">Select a monster on the left to get started.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+
+      <div class="footer-section">
+        <h4>Difficulty</h4>
+        <ul>
+          <li><span class="footer-key">Beginner</span><span>— Playable your first game</span></li>
+          <li><span class="footer-key">Intermediate</span><span>— Takes ~2 games to click</span></li>
+          <li><span class="footer-key">Advanced</span><span>— Takes ~3+ games to master</span></li>
+        </ul>
+        <h4 style="margin-top:0.9rem">Combo</h4>
+        <p>Card, Power, and Tile synergies that amplify a monster's strengths — shown in each guide under <em>Best Evolution Combos</em> and <em>Card Priorities</em>.</p>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-section">
+        <h4>Playstyles</h4>
+        <ul class="footer-playstyles">
+          <li><span class="footer-key">Scorer</span><span>Points-focused</span></li>
+          <li><span class="footer-key">Smasher</span><span>Damage-focused</span></li>
+          <li><span class="footer-key">Harvester</span><span>Energy-focused</span></li>
+          <li><span class="footer-key">Defender</span><span>Tokyo control</span></li>
+          <li><span class="footer-key">Disruptor</span><span>Interferes with plays</span></li>
+          <li><span class="footer-key">Collector</span><span>Card-focused</span></li>
+          <li><span class="footer-key">Tanker</span><span>Healing &amp; durability</span></li>
+          <li><span class="footer-key">Climber</span><span>VP ladder-focused</span></li>
+        </ul>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-section">
+        <h4>About</h4>
+        <p>A fan-made guide for <em>King of Tokyo</em> monsters. Stats and playstyle ratings are community-assessed, not official values.</p>
+        <p style="margin-top:0.5rem">King of Tokyo is designed by Richard Garfield and published by IELLO.</p>
+      </div>
+
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // ── STATE ──────────────────────────────────────────────
+  let allMonsters = [];
+  let activeId    = null;
+  let searchQuery = '';
+  let filterDifficulty = 'all';
+  let filterPlaystyle  = 'all';
+
+  // ── FETCH DATA ─────────────────────────────────────────
+  fetch('data.json')
+    .then(r => r.json())
+    .then(data => {
+      allMonsters = data.monsters;
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      renderList();
+    })
+    .catch(err => {
+      document.getElementById('loading').textContent = '⚠️ Could not load data.json — run build.py first.';
+      console.error(err);
+    });
+
+  // ── FILTER & SEARCH ────────────────────────────────────
+  function filteredMonsters() {
+    return allMonsters.filter(m => {
+      const matchDifficulty = filterDifficulty === 'all' || m.difficulty === filterDifficulty;
+      const playstyleArr = Array.isArray(m.playstyle) ? m.playstyle : [m.playstyle].filter(Boolean);
+      const matchPlaystyle = filterPlaystyle === 'all' || playstyleArr.includes(filterPlaystyle);
+      if (!matchDifficulty || !matchPlaystyle) return false;
+      if (!searchQuery) return true;
+      const q = searchQuery.toLowerCase();
+      const playstyleStr = playstyleArr.join(' ');
+      return (
+        m.name?.toLowerCase().includes(q) ||
+        playstyleStr.toLowerCase().includes(q) ||
+        m.tagline?.toLowerCase().includes(q) ||
+        m.content_html?.toLowerCase().includes(q)
+      );
+    });
+  }
+
+  // ── RENDER SIDEBAR ─────────────────────────────────────
+  function renderList() {
+    const monsters = filteredMonsters();
+    const list = document.getElementById('monster-list');
+    const count = document.getElementById('monster-count');
+
+    count.textContent = `${monsters.length} monster${monsters.length !== 1 ? 's (and counting)' : ''}`;
+
+    if (!monsters.length) {
+      list.innerHTML = '<div class="no-results">No monsters match your search.</div>';
+      return;
+    }
+
+    list.innerHTML = monsters.map(m => `
+      <div class="monster-card ${m.id === activeId ? 'active' : ''}" data-id="${m.id}">
+        <div class="monster-icon">${m.icon || '👾'}</div>
+        <div class="monster-meta">
+          <div class="monster-name">${m.name}</div>
+        <div class="monster-playstyle">${Array.isArray(m.playstyle) ? m.playstyle.join(', ') : (m.playstyle || '')}</div>
+        </div>
+        <div class="difficulty-dot ${m.difficulty || ''}"></div>
+      </div>
+    `).join('');
+
+    list.querySelectorAll('.monster-card').forEach(card => {
+      card.addEventListener('click', () => selectMonster(card.dataset.id));
+    });
+  }
+
+  // ── RENDER DETAIL ──────────────────────────────────────
+  function selectMonster(id) {
+    activeId = id;
+    const m = allMonsters.find(x => x.id === id);
+    if (!m) return;
+
+    renderList(); // refresh active state
+
+    const stats = m.stats || {};
+    const statKeys = ['aggression', 'resilience', 'energy', 'speed'];
+
+    const statBars = statKeys.map(key => {
+      const val = stats[key] || 0;
+      const pct = (val / 5) * 100;
+      return `
+        <div class="stat-row">
+          <div class="stat-label">${key} — ${val}/5</div>
+          <div class="stat-bar-bg">
+            <div class="stat-bar-fill ${key}" style="width:${pct}%"></div>
+          </div>
+        </div>`;
+    }).join('');
+
+    document.getElementById('detail').innerHTML = `
+      <div class="detail-header">
+        <div class="detail-icon">${m.icon || '👾'}</div>
+        <div>
+          <div class="detail-title">${m.name}</div>
+          <div class="detail-tagline">${m.tagline || ''}</div>
+          <div class="detail-tags">
+            <span class="tag difficulty ${m.difficulty || ''}">${m.difficulty || ''}</span>
+            ${(Array.isArray(m.playstyle) ? m.playstyle : [m.playstyle]).filter(Boolean).map(p => `<span class="tag playstyle">${p}</span>`).join('')}
+            ${m.type ? `<span class="tag type">${m.type}</span>` : ''}
+          </div>
+        </div>
+      </div>
+      <!-- <div class="stats-grid">${statBars}</div> -->
+      <div class="detail-content">${m.content_html || ''}</div>
+    `;
+
+    // Animate stat bars (trigger reflow)
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.stat-bar-fill').forEach(bar => {
+        const w = bar.style.width;
+        bar.style.width = '0';
+        requestAnimationFrame(() => bar.style.width = w);
+      });
+    });
+  }
+
+  // ── EVENTS ─────────────────────────────────────────────
+  document.getElementById('search').addEventListener('input', e => {
+    searchQuery = e.target.value;
+    renderList();
+  });
+
+  document.getElementById('filter-difficulty').addEventListener('change', e => {
+    filterDifficulty = e.target.value;
+    e.target.classList.toggle('active', filterDifficulty !== 'all');
+    renderList();
+  });
+
+  document.getElementById('filter-playstyle').addEventListener('change', e => {
+    filterPlaystyle = e.target.value;
+    e.target.classList.toggle('active', filterPlaystyle !== 'all');
+    renderList();
+  });
+  
+  document.getElementById('home-btn').addEventListener('click', e => {
+  e.preventDefault();
+  activeId = null;
+  renderList();
+  document.getElementById('detail').innerHTML = `
+      <div class="empty-state">
+        <div class="big-icon">👑</div>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The Monster Guide</h2>
+        <p style="font-style:italic;color:var(--muted);margin-bottom:1.25rem;">Your companion for mastering every monster in King of Tokyo.</p>
+        <p style="max-width:400px;">Use this guide to explore each monster's playstyle, evolution cards, strengths, and strategies — whether you're picking up a monster for the first time or looking to sharpen your game.</p>
+        <ul style="list-style:none;padding:0;margin:1rem 0;text-align:left;display:flex;flex-direction:column;gap:0.4rem;">
+          <li>🔍 <strong>Search</strong> monsters by name, playstyle, or keyword.</li>
+          <li>🎯 <strong>Filter</strong> by difficulty to find the right fit.</li>
+          <li>📖 <strong>Select</strong> any monster to read their full guide.</li>
+        </ul>
+        <p style="color:var(--muted);font-style:italic;margin-top:0.5rem;">Select a monster on the left to get started.</p>
+      </div>
+  `;
+});
+</script>
+</body>
+</html>
