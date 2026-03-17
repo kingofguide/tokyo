@@ -1,4 +1,4 @@
-# 🎲 King of Tokyo — Monster Guide
+# King of Tokyo — Monster Guide
 
 A static web guide for King of Tokyo monsters. Built with plain HTML/CSS/JS + Markdown content files.
 
