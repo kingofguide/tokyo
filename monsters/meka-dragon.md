@@ -3,8 +3,9 @@ name: Meka Dragon
 icon: 🐲
 tagline: "High-tech, high-ceiling. The energy machine."
 type: Robot
+game: Tokyo
 difficulty: Beginner
-playstyle:
+style:
   - Smasher
 stats:
   aggression: 3

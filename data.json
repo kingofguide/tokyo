@@ -6,11 +6,12 @@
       "icon": "\ud83d\udc7e",
       "tagline": "The Space Challenger. Turns every disadvantage into fuel.",
       "difficulty": "Intermediate",
-      "playstyle": [
+      "style": [
         "Harvester",
         "Collector"
       ],
       "type": "Alien",
+      "game": "Tokyo",
       "stats": {
         "aggression": 3,
         "resilience": 3,
@@ -25,11 +26,12 @@
       "icon": "\ud83d\udc31",
       "tagline": "Nine lives, zero mercy. The cat always lands on her feet.",
       "difficulty": "Advanced",
-      "playstyle": [
+      "style": [
         "Disruptor",
         "Smasher"
       ],
       "type": "Mutant",
+      "game": "Tokyo",
       "stats": {
         "aggression": 4,
         "resilience": 2,
@@ -44,8 +46,9 @@
       "icon": "\ud83e\udd96",
       "tagline": "Raw nuclear power. Built to smash, not finesse.",
       "type": "Mutant",
+      "game": "Tokyo",
       "difficulty": "Beginner",
-      "playstyle": [
+      "style": [
         "Smasher",
         "Scorer",
         "Climber"
@@ -64,8 +67,9 @@
       "icon": "\ud83d\udc32",
       "tagline": "High-tech, high-ceiling. The energy machine.",
       "type": "Robot",
+      "game": "Tokyo",
       "difficulty": "Beginner",
-      "playstyle": [
+      "style": [
         "Smasher"
       ],
       "stats": {
@@ -82,11 +86,12 @@
       "icon": "\ud83d\udc27",
       "tagline": "The Antarctic Anarchist. Steals your tools, freezes your plans.",
       "difficulty": "Advanced",
-      "playstyle": [
+      "style": [
         "Disruptor",
         "Collector"
       ],
       "type": "Alien",
+      "game": "Tokyo",
       "stats": {
         "aggression": 2,
         "resilience": 3,
@@ -101,11 +106,12 @@
       "icon": "\ud83e\udd8d",
       "tagline": "King of the concrete jungle. Tokyo is his throne \u2014 and he intends to keep it.",
       "difficulty": "Intermediate",
-      "playstyle": [
+      "style": [
         "Defender",
         "Scorer"
       ],
-      "type": "Beast",
+      "type": "Mutant",
+      "game": "Tokyo",
       "stats": {
         "aggression": 4,
         "resilience": 3,

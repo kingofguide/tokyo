@@ -3,10 +3,11 @@ name: Alienoid
 icon: 👾
 tagline: "The Space Challenger. Turns every disadvantage into fuel."
 difficulty: Intermediate
-playstyle:
+style:
   - Harvester
   - Collector
 type: Alien
+game: Tokyo
 stats:
   aggression: 3
   resilience: 3
