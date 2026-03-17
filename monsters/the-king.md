@@ -15,32 +15,6 @@ stats:
   speed: 3
 ---
 
-Lets get back to updating content.
-Let's focus on The King.
-Remove mdashes. Remove mentions of "4 player games".
-Remove any mentions of gender such as "He or she".
-Update the playstyle section based more on their evolutions.
-Remove the medium game section and shorten the early game and late game. Only give 2 points each.
-Return in markdown so I can copy and paste.
-Overall, make the entre thing more concise, and a bit more simple.
-This is their current content to edit:
-
----
-name: The King
-icon: 🦍
-tagline: "King of the concrete jungle. Tokyo is his throne — and he intends to keep it."
-difficulty: Intermediate
-style:
-  - Defender
-  - Scorer
-type: Mutant
-game: Tokyo
-stats:
-  aggression: 4
-  resilience: 3
-  energy: 2
-  speed: 3
----
 ## Overview
 The King is a giant gorilla with one obsession: owning Tokyo. Every evolution card he has either rewards him for being in Tokyo, punishes opponents for trying to remove him, or gets him back in the moment he's forced out. He's not interested in energy or card engines — he wants the throne, and he wants it now.
 He's a strong pick for players who enjoy positional play and VP accumulation over raw aggression.
