@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # King of Tokyo — Monster Guide
+=======
+# 🎲 King of Tokyo — Monster Guide
+>>>>>>> 2daae520e11f5e219e414e4828797dba3840f4fd
 
 A static web guide for King of Tokyo monsters. Built with plain HTML/CSS/JS + Markdown content files.
 
