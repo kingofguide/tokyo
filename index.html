@@ -568,6 +568,12 @@
           display: block;
           background: var(--bg);
         }
+        .big-icon {display: none;}
+        .empty-state {
+          align-items: left;
+          justify-content: left;
+          text-align: left;
+        }
         .monster-count { padding: 0 1rem 0.5rem; }
         #monster-list {
           display: flex;
@@ -641,7 +647,7 @@
         <input id="search" type="text" placeholder="Search monsters, playstyles, tips…" autocomplete="off" />
       </div>
       <div class="filters" id="filters">
-        <button id="filter-clear" style="display:none">↺</button>
+        
         <div class="filter-select-wrap">
           <select class="filter-select" id="filter-difficulty">
             <option value="all">All Skills</option>
@@ -663,6 +669,7 @@
             <label><input type="checkbox" value="Climber"> Climber</label>
           </div>
         </div>
+        <button id="filter-clear" style="display:none">↺</button>
       </div>
     </div>
   </header>
