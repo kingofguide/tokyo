@@ -518,7 +518,7 @@
       header {
         position: relative;
         z-index: 200;
-        padding: 1rem 1rem 1rem;
+        padding: 0rem 0rem 0rem;
       } 
       .header-inner {
         gap: 0.5rem;
@@ -527,7 +527,7 @@
         align-items: center;
       }
       .logo {
-        font-size: 1.1rem;
+        font-size: 2.1rem;
         flex-shrink: 0;
         width: 100%;
         order: 1;
@@ -650,7 +650,7 @@
 <div id="app" style="display:none">
   <header>
     <div class="header-inner">
-      <a class="logo" href="#" id="home-btn">King of <span>Guide</span> <small style="font-size:0.55em;letter-spacing:0.15em;color:var(--muted)"><span style="color:var(--accent);opacity:70%">Tokyo</span> Monsters</small></a>
+      <a class="logo" href="#" id="home-btn">King of <span>Guide</span> <small style="font-size:0.55em;letter-spacing:0.15em;color:var(--muted)"><span style="color:var(--accent);opacity:80%">Tokyo</span> Monsters</small></a>
       <div class="search-wrap">
         <span class="search-icon">🔍</span>
         <input id="search" type="text" placeholder="Search monsters, styles, tips…" autocomplete="off" />
@@ -788,7 +788,7 @@
   function filteredMonsters() {
     return allMonsters.filter(m => {
       const matchDifficulty = filterDifficulty === 'all' || m.difficulty === filterDifficulty;
-      const styleArr = Array.isArray(m.playstyle) ? m.playstyle : [m.playstyle].filter(Boolean);
+      const styleArr = Array.isArray(m.style) ? m.style : [m.style].filter(Boolean);
       const matchstyle = filterStyles.length === 0 || filterStyles.every(p => styleArr.includes(p));
       const gameArr = Array.isArray(m.game) ? m.game : [m.game].filter(Boolean);
       const matchGame = filterGames.length === 0 || filterGames.some(g => gameArr.includes(g));
@@ -823,7 +823,7 @@
         <div class="monster-icon">${m.icon || '👾'}</div>
         <div class="monster-meta">
           <div class="monster-name">${m.name}</div>
-        <div class="monster-style">${Array.isArray(m.playstyle) ? m.playstyle.join(', ') : (m.playstyle || '')}</div>
+        <div class="monster-style">${Array.isArray(m.style) ? m.style.join(', ') : (m.style || '')}</div>
         </div>
         <div class="difficulty-dot ${m.difficulty || ''}"></div>
       </div>
@@ -865,7 +865,7 @@
           <div class="detail-tagline">${m.tagline || ''}</div>
           <div class="detail-tags">
             <span class="tag difficulty ${m.difficulty || ''}">${m.difficulty || ''}</span>
-            ${(Array.isArray(m.playstyle) ? m.playstyle : [m.playstyle]).filter(Boolean).map(p => `<span class="tag style">${p}</span>`).join('')}
+            ${(Array.isArray(m.style) ? m.style : [m.style]).filter(Boolean).map(p => `<span class="tag style">${p}</span>`).join('')}
             ${m.type ? `<span class="tag type">${m.type}</span>` : ''}
           </div>
         </div>
