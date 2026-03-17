@@ -1,7 +1,7 @@
 ---
 name: Meka Dragon
 icon: 🐲
-tagline: "High-tech, high-ceiling. The energy machine."
+tagline: "Deal damage and don't stop."
 type: Robot
 game: Tokyo
 difficulty: Beginner

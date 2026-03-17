@@ -1,7 +1,7 @@
 ---
 name: The King
 icon: 🦍
-tagline: "King of the concrete jungle. Tokyo is his throne — and he intends to keep it."
+tagline: "Tokyo focused gorilla goodness."
 difficulty: Intermediate
 style:
   - Defender
@@ -15,7 +15,7 @@ stats:
   speed: 3
 ---
 ## Overview
-The King is a giant gorilla with one obsession: owning Tokyo. Every evolution card either rewards being in Tokyo, punishes opponents for trying to remove control, or reclaims the throne the moment it's lost. Energy and card engines are irrelevant. The throne is all that matters.
+A giant gorilla with one obsession: owning Tokyo. Every evolution card either rewards being in Tokyo, punishes opponents for trying to remove control, or reclaims the throne the moment it's lost. Energy and cards are less important as the Tokyo throne is the goal.
 
 A strong pick for players who enjoy positional play and VP accumulation over raw aggression.
 

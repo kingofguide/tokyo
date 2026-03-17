@@ -1,7 +1,7 @@
 ---
 name: Space Penguin
 icon: 🐧
-tagline: "The Antarctic Anarchist. Steals your tools, freezes your plans."
+tagline: "Steal tools, freeze plays."
 difficulty: Advanced
 style:
   - Disruptor
