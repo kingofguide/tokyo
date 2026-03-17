@@ -3,10 +3,11 @@ name: Space Penguin
 icon: 🐧
 tagline: "The Antarctic Anarchist. Steals your tools, freezes your plans."
 difficulty: Advanced
-playstyle:
+style:
   - Disruptor
   - Collector
 type: Alien
+game: Tokyo
 stats:
   aggression: 2
   resilience: 3

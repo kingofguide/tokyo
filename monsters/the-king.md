@@ -3,10 +3,11 @@ name: The King
 icon: 🦍
 tagline: "King of the concrete jungle. Tokyo is his throne — and he intends to keep it."
 difficulty: Intermediate
-playstyle:
+style:
   - Defender
   - Scorer
-type: Beast
+type: Mutant
+game: Tokyo
 stats:
   aggression: 4
   resilience: 3

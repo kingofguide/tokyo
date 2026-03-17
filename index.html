@@ -102,6 +102,7 @@
     }
     .filter-select-wrap {
       position: relative;
+      flex: 1;
     }
     .filter-select-wrap::after {
       content: '▾';
@@ -114,6 +115,7 @@
       pointer-events: none;
     }
     .filter-select {
+      width: 100%;
       appearance: none;
       -webkit-appearance: none;
       background: var(--bg3);
@@ -247,7 +249,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .monster-playstyle {
+    .monster-style {
       font-size: 0.73rem;
       color: var(--muted);
       white-space: nowrap;
@@ -335,7 +337,7 @@
     .tag.difficulty.Beginner     { background: rgba(76,175,80,0.15);  color: #4caf50; border: 1px solid rgba(76,175,80,0.3); }
     .tag.difficulty.Intermediate { background: rgba(255,159,28,0.15); color: var(--accent2); border: 1px solid rgba(255,159,28,0.3); }
     .tag.difficulty.Advanced     { background: rgba(230,57,70,0.15);  color: var(--accent); border: 1px solid rgba(230,57,70,0.3); }
-    .tag.playstyle  { background: rgba(228, 215, 29, 0.12); color: #e5e5e5; border: 1px solid rgba(160,100,255,0.3); }
+    .tag.style  { background: rgba(228, 215, 29, 0.12); color: #e5e5e5; border: 1px solid rgba(160,100,255,0.3); }
     {{/*  .tag.type       { background: rgba(255, 159, 28, 0.12); color: #e5e5e5; border: 1px solid rgba(100,180,255,0.3); }  */}}
     .tag.type { display: none; }
 
@@ -483,7 +485,7 @@
       white-space: nowrap;
       font-size: 0.78rem;
     }
-    .footer-playstyles {
+    .footer-styles {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0.2rem 1rem;
@@ -491,7 +493,7 @@
       padding: 0;
       margin: 0;
     }
-    .footer-playstyles li { display: flex; gap: 0.4rem; align-items: baseline; font-size: 0.78rem; color: var(--muted); }
+    .footer-styles li { display: flex; gap: 0.4rem; align-items: baseline; font-size: 0.78rem; color: var(--muted); }
     .footer-divider { display: none; }
 
     /* ── LOADING / ERROR ────────────────────────────────── */
@@ -525,21 +527,28 @@
         align-items: center;
       }
       .logo {
-        font-size: 1.4rem;
+        font-size: 1.1rem;
         flex-shrink: 0;
+        width: 100%;
+        order: 1;
+        white-space: nowrap;
+        line-height: 1.3;
       }
       .logo small {
-        font-size: 0.5em;
+        font-size: 0.6em;
+      }
+      #search {
+        padding: 0.25rem 1rem 0.25rem 2.6rem;
       }
       .search-wrap {
         flex: 1;
         min-width: 0;
         max-width: 100%;
-        order: 3;
+        order: 2;
         width: 100%;
       }
       .filters {
-        order: 4;
+        order: 3;
         margin-left: 0;
         width: 100%;
         gap: 0.4rem;
@@ -582,7 +591,7 @@
           scroll-snap-type: x mandatory;
           -webkit-overflow-scrolling: touch;
           gap: 0.5rem;
-          padding: 0.25rem 1rem 0.75rem;
+          padding: 0.25rem 1rem 0rem;
           scrollbar-width: none;
         }
         #monster-list::-webkit-scrollbar { display: none; }
@@ -605,7 +614,7 @@
         }
         .monster-icon { font-size: 2rem; }
         .monster-name { font-size: 0.85rem; white-space: normal; line-height: 1.2; }
-        .monster-playstyle { display: none; }
+        .monster-style { display: none; }
         .difficulty-dot { margin: 0 auto; }
         .monster-count { width: 100%; }
       }
@@ -641,24 +650,24 @@
 <div id="app" style="display:none">
   <header>
     <div class="header-inner">
-      <a class="logo" href="#" id="home-btn">King of <span>Guide</span><br><small style="font-size:0.55em;letter-spacing:0.15em;color:var(--muted)"><span style="color:var(--accent);opacity:70%">Tokyo</span> Monsters</small></a>
+      <a class="logo" href="#" id="home-btn">King of <span>Guide</span> <small style="font-size:0.55em;letter-spacing:0.15em;color:var(--muted)"><span style="color:var(--accent);opacity:70%">Tokyo</span> Monsters</small></a>
       <div class="search-wrap">
         <span class="search-icon">🔍</span>
-        <input id="search" type="text" placeholder="Search monsters, playstyles, tips…" autocomplete="off" />
+        <input id="search" type="text" placeholder="Search monsters, styles, tips…" autocomplete="off" />
       </div>
       <div class="filters" id="filters">
         
         <div class="filter-select-wrap">
           <select class="filter-select" id="filter-difficulty">
-            <option value="all">All Skills</option>
+            <option value="all">Skills</option>
             <option value="Beginner">Beginner</option>
             <option value="Intermediate">Intermediate</option>
             <option value="Advanced">Advanced</option>
           </select>
         </div>
-        <div class="filter-select-wrap" id="playstyle-wrap">
-          <button class="filter-select" id="playstyle-toggle">All Styles</button>
-          <div class="checkbox-dropdown" id="playstyle-dropdown">
+        <div class="filter-select-wrap" id="style-wrap">
+          <button class="filter-select" id="style-toggle">Styles</button>
+          <div class="checkbox-dropdown" id="style-dropdown">
             <label><input type="checkbox" value="Scorer"> Scorer</label>
             <label><input type="checkbox" value="Smasher"> Smasher</label>
             <label><input type="checkbox" value="Harvester"> Harvester</label>
@@ -669,6 +678,18 @@
             <label><input type="checkbox" value="Climber"> Climber</label>
           </div>
         </div>
+
+        <div class="filter-select-wrap" id="game-wrap">
+          <button class="filter-select" id="game-toggle">Games</button>
+          <div class="checkbox-dropdown" id="game-dropdown">
+            <label><input type="checkbox" value="Tokyo">Tokyo</label>
+            <label><input type="checkbox" value="New York">New York</label>
+            <label><input type="checkbox" value="Monster Pack">Monster Pack</label>
+            <label><input type="checkbox" value="Mindbug">Mindbug</label>
+            <label><input type="checkbox" value="Godzilla">Godzilla</label>
+          </div>
+        </div>
+
         <button id="filter-clear" style="display:none">↺</button>
       </div>
     </div>
@@ -684,9 +705,9 @@
         <div class="big-icon">👑</div>
         <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The <br><span style="color:var(--accent)">King of Tokyo Monster Guide</span></h2>
         <p style="font-style:italic;color:var(--muted);margin-bottom:1.25rem;">Your companion for mastering every monster in King of Tokyo.</p>
-        <p style="max-width:400px;">Use this guide to explore each monster's playstyle, evolution cards, strengths, and strategies — whether you're picking up a monster for the first time or looking to sharpen your game.</p>
+        <p style="max-width:400px;">Use this guide to explore each monster's style, evolution cards, strengths, and strategies — whether you're picking up a monster for the first time or looking to sharpen your game.</p>
         <ul style="list-style:none;padding:0;margin:1rem 0;text-align:left;display:flex;flex-direction:column;gap:0.4rem;">
-          <li>🔍 <strong>Search</strong> monsters by name, playstyle, or keyword.</li>
+          <li>🔍 <strong>Search</strong> monsters by name, style, or keyword.</li>
           <li>🎯 <strong>Filter</strong> by difficulty to find the right fit.</li>
           <li>📖 <strong>Select</strong> any monster to read their full guide.</li>
         </ul>
@@ -712,8 +733,8 @@
       <div class="footer-divider"></div>
 
       <div class="footer-section">
-        <h4>Playstyles</h4>
-        <ul class="footer-playstyles">
+        <h4>Styles</h4>
+        <ul class="footer-styles">
           <li><span class="footer-key">Scorer</span><span>Points-focused</span></li>
           <li><span class="footer-key">Smasher</span><span>Damage-focused</span></li>
           <li><span class="footer-key">Harvester</span><span>Energy-focused</span></li>
@@ -729,7 +750,7 @@
 
       <div class="footer-section">
         <h4>About</h4>
-        <p>A fan-made guide for <em>King of Tokyo</em> monsters. Stats and playstyle ratings are community-assessed, not official values.</p>
+        <p>A fan-made guide for <em>King of Tokyo</em> monsters. Stats and style ratings are community-assessed, not official values.</p>
         <p style="margin-top:0.5rem">Guide content and code was generated with the assistance of AI. All content is reviewed and curated by the site's author.</p>
         <p style="margin-top:0.5rem">King of Tokyo is designed by Richard Garfield and published by IELLO.</p>
         <p style="margin-top:0.5rem">© 2025 King of Guide. All rights reserved.</p>
@@ -746,7 +767,8 @@
   let activeId    = null;
   let searchQuery = '';
   let filterDifficulty = 'all';
-  let filterPlaystyles = [];
+  let filterStyles = [];
+  let filterGames = [];
 
   // ── FETCH DATA ─────────────────────────────────────────
   fetch('data.json')
@@ -766,15 +788,17 @@
   function filteredMonsters() {
     return allMonsters.filter(m => {
       const matchDifficulty = filterDifficulty === 'all' || m.difficulty === filterDifficulty;
-      const playstyleArr = Array.isArray(m.playstyle) ? m.playstyle : [m.playstyle].filter(Boolean);
-      const matchPlaystyle = filterPlaystyles.length === 0 || filterPlaystyles.every(p => playstyleArr.includes(p));
-      if (!matchDifficulty || !matchPlaystyle) return false;
+      const styleArr = Array.isArray(m.playstyle) ? m.playstyle : [m.playstyle].filter(Boolean);
+      const matchstyle = filterStyles.length === 0 || filterStyles.every(p => styleArr.includes(p));
+      const gameArr = Array.isArray(m.game) ? m.game : [m.game].filter(Boolean);
+      const matchGame = filterGames.length === 0 || filterGames.some(g => gameArr.includes(g));
+      if (!matchDifficulty || !matchstyle || !matchGame) return false;
       if (!searchQuery) return true;
       const q = searchQuery.toLowerCase();
-      const playstyleStr = playstyleArr.join(' ');
+      const styleStr = styleArr.join(' ');
       return (
         m.name?.toLowerCase().includes(q) ||
-        playstyleStr.toLowerCase().includes(q) ||
+        styleStr.toLowerCase().includes(q) ||
         m.tagline?.toLowerCase().includes(q) ||
         m.content_html?.toLowerCase().includes(q)
       );
@@ -799,7 +823,7 @@
         <div class="monster-icon">${m.icon || '👾'}</div>
         <div class="monster-meta">
           <div class="monster-name">${m.name}</div>
-        <div class="monster-playstyle">${Array.isArray(m.playstyle) ? m.playstyle.join(', ') : (m.playstyle || '')}</div>
+        <div class="monster-style">${Array.isArray(m.playstyle) ? m.playstyle.join(', ') : (m.playstyle || '')}</div>
         </div>
         <div class="difficulty-dot ${m.difficulty || ''}"></div>
       </div>
@@ -841,7 +865,7 @@
           <div class="detail-tagline">${m.tagline || ''}</div>
           <div class="detail-tags">
             <span class="tag difficulty ${m.difficulty || ''}">${m.difficulty || ''}</span>
-            ${(Array.isArray(m.playstyle) ? m.playstyle : [m.playstyle]).filter(Boolean).map(p => `<span class="tag playstyle">${p}</span>`).join('')}
+            ${(Array.isArray(m.playstyle) ? m.playstyle : [m.playstyle]).filter(Boolean).map(p => `<span class="tag style">${p}</span>`).join('')}
             ${m.type ? `<span class="tag type">${m.type}</span>` : ''}
           </div>
         </div>
@@ -876,9 +900,9 @@
         <div class="big-icon">👑</div>
         <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The <br><span style="color:var(--accent)">King of Tokyo Monster Guide</span></h2>
         <p style="font-style:italic;color:var(--muted);margin-bottom:1.25rem;">Your companion for mastering every monster in King of Tokyo.</p>
-        <p style="max-width:400px;">Use this guide to explore each monster's playstyle, evolution cards, strengths, and strategies — whether you're picking up a monster for the first time or looking to sharpen your game.</p>
+        <p style="max-width:400px;">Use this guide to explore each monster's style, evolution cards, strengths, and strategies — whether you're picking up a monster for the first time or looking to sharpen your game.</p>
         <ul style="list-style:none;padding:0;margin:1rem 0;text-align:left;display:flex;flex-direction:column;gap:0.4rem;">
-          <li>🔍 <strong>Search</strong> monsters by name, playstyle, or keyword.</li>
+          <li>🔍 <strong>Search</strong> monsters by name, style, or keyword.</li>
           <li>🎯 <strong>Filter</strong> by difficulty to find the right fit.</li>
           <li>📖 <strong>Select</strong> any monster to read their full guide.</li>
         </ul>
@@ -889,18 +913,22 @@
 
   function updateClearButton() {
   const btn = document.getElementById('filter-clear');
-  const active = filterDifficulty !== 'all' || filterPlaystyles.length > 0;
+  const active = filterDifficulty !== 'all' || filterStyles.length > 0 || filterGames.length > 0;
   btn.style.display = active ? 'block' : 'none';
   }
 
   document.getElementById('filter-clear').addEventListener('click', () => {
     filterDifficulty = 'all';
-    filterPlaystyles = [];
+    filterStyles = [];
     document.getElementById('filter-difficulty').value = 'all';
     document.getElementById('filter-difficulty').classList.remove('active');
-    playstyleDropdown.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
-    playstyleToggle.textContent = 'All Playstyles';
-    playstyleToggle.classList.remove('active');
+    styleDropdown.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    styleToggle.textContent = 'Styles';
+    styleToggle.classList.remove('active');
+    filterGames = [];
+    gameDropdown.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    gameToggle.textContent = 'Games';
+    gameToggle.classList.remove('active');
     document.getElementById('filter-clear').style.display = 'none';
     renderList();
   });
@@ -912,29 +940,55 @@
     updateClearButton();
   });
 
-const playstyleToggle = document.getElementById('playstyle-toggle');
-const playstyleDropdown = document.getElementById('playstyle-dropdown');
+const styleToggle = document.getElementById('style-toggle');
+const styleDropdown = document.getElementById('style-dropdown');
 
-playstyleToggle.addEventListener('click', e => {
+styleToggle.addEventListener('click', e => {
   e.stopPropagation();
-  playstyleDropdown.classList.toggle('open');
+  styleDropdown.classList.toggle('open');
   });
 
   document.addEventListener('click', e => {
-    if (!document.getElementById('playstyle-wrap').contains(e.target)) {
-      playstyleDropdown.classList.remove('open');
+    if (!document.getElementById('style-wrap').contains(e.target)) {
+      styleDropdown.classList.remove('open');
     }
   });
+  const gameToggle = document.getElementById('game-toggle');
+const gameDropdown = document.getElementById('game-dropdown');
 
-  playstyleDropdown.addEventListener('change', e => {
+gameToggle.addEventListener('click', e => {
+  e.stopPropagation();
+  gameDropdown.classList.toggle('open');
+});
+
+document.addEventListener('click', e => {
+  if (!document.getElementById('game-wrap').contains(e.target)) {
+    gameDropdown.classList.remove('open');
+  }
+});
+
+gameDropdown.addEventListener('change', e => {
+  if (e.target.type === 'checkbox') {
+    filterGames = Array.from(
+      gameDropdown.querySelectorAll('input[type="checkbox"]:checked')
+    ).map(cb => cb.value);
+    const count = filterGames.length;
+    gameToggle.textContent = count === 0 ? 'Games' : `${count} Game${count > 1 ? 's' : ''}`;
+    gameToggle.classList.toggle('active', count > 0);
+    renderList();
+    updateClearButton();
+  }
+});
+
+  styleDropdown.addEventListener('change', e => {
     if (e.target.type === 'checkbox') {
-      filterPlaystyles = Array.from(
-        playstyleDropdown.querySelectorAll('input[type="checkbox"]:checked')
+      filterStyles = Array.from(
+        styleDropdown.querySelectorAll('input[type="checkbox"]:checked')
       ).map(cb => cb.value);
 
-      const count = filterPlaystyles.length;
-      playstyleToggle.textContent = count === 0 ? 'All Playstyles' : `${count} Playstyle${count > 1 ? 's' : ''}`;
-      playstyleToggle.classList.toggle('active', count > 0);
+      const count = filterStyles.length;
+      styleToggle.textContent = count === 0 ? 'Styles' : `${count} style${count > 1 ? 's' : ''}`;
+      styleToggle.classList.toggle('active', count > 0);
       renderList();
       updateClearButton();
     }

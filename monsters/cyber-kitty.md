@@ -3,10 +3,11 @@ name: Cyber Kitty
 icon: 🐱
 tagline: "Nine lives, zero mercy. The cat always lands on her feet."
 difficulty: Advanced
-playstyle:
+style:
   - Disruptor
   - Smasher
 type: Mutant
+game: Tokyo
 stats:
   aggression: 4
   resilience: 2
