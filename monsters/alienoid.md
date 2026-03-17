@@ -1,7 +1,7 @@
 ---
 name: Alienoid
 icon: 👾
-tagline: "The Space Challenger. Turns every disadvantage into fuel."
+tagline: "Grow energy and gain cards."
 difficulty: Intermediate
 style:
   - Harvester

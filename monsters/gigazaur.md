@@ -1,7 +1,7 @@
 ---
 name: Gigazaur
 icon: 🦖
-tagline: "Raw nuclear power. Built to smash, not finesse."
+tagline: "Smash players, gain points and tiles."
 type: Mutant
 game: Tokyo
 difficulty: Beginner

@@ -1,7 +1,7 @@
 ---
 name: Space Penguin
 icon: 🐧
-tagline: "Steal tools, freeze plays."
+tagline: "Freeze players, copy powers and disrupt plays."
 difficulty: Advanced
 style:
   - Disruptor

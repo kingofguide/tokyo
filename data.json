@@ -4,7 +4,7 @@
       "id": "alienoid",
       "name": "Alienoid",
       "icon": "\ud83d\udc7e",
-      "tagline": "The Space Challenger. Turns every disadvantage into fuel.",
+      "tagline": "Grow energy and gain cards.",
       "difficulty": "Intermediate",
       "style": [
         "Harvester",
@@ -24,7 +24,7 @@
       "id": "cyber-kitty",
       "name": "Cyber Kitty",
       "icon": "\ud83d\udc31",
-      "tagline": "Nine lives, zero mercy. The cat always lands on her feet.",
+      "tagline": "Deny death and mess with plays.",
       "difficulty": "Advanced",
       "style": [
         "Disruptor",
@@ -44,7 +44,7 @@
       "id": "gigazaur",
       "name": "Gigazaur",
       "icon": "\ud83e\udd96",
-      "tagline": "Raw nuclear power. Built to smash, not finesse.",
+      "tagline": "Smash players, gain points and tiles.",
       "type": "Mutant",
       "game": "Tokyo",
       "difficulty": "Beginner",
@@ -65,7 +65,7 @@
       "id": "meka-dragon",
       "name": "Meka Dragon",
       "icon": "\ud83d\udc32",
-      "tagline": "Deal damage and don't stop.",
+      "tagline": "Deal damage, apply multipliers and eliminate everyone.",
       "type": "Robot",
       "game": "Tokyo",
       "difficulty": "Beginner",
@@ -84,7 +84,7 @@
       "id": "space-penguin",
       "name": "Space Penguin",
       "icon": "\ud83d\udc27",
-      "tagline": "Steal tools, freeze plays.",
+      "tagline": "Freeze players, copy powers and disrupt plays.",
       "difficulty": "Advanced",
       "style": [
         "Disruptor",
@@ -104,7 +104,7 @@
       "id": "the-king",
       "name": "The King",
       "icon": "\ud83e\udd8d",
-      "tagline": "Tokyo focused gorilla goodness.",
+      "tagline": "Control Tokyo and max out points.",
       "difficulty": "Intermediate",
       "style": [
         "Defender",

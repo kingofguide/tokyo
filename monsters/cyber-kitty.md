@@ -1,7 +1,7 @@
 ---
 name: Cyber Kitty
 icon: 🐱
-tagline: "Nine lives, zero mercy. The cat always lands on her feet."
+tagline: "Deny death and mess with plays."
 difficulty: Advanced
 style:
   - Disruptor

@@ -1,7 +1,7 @@
 ---
 name: The King
 icon: 🦍
-tagline: "Tokyo focused gorilla goodness."
+tagline: "Control Tokyo and max out points."
 difficulty: Intermediate
 style:
   - Defender

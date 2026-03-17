@@ -1,7 +1,7 @@
 ---
 name: Meka Dragon
 icon: 🐲
-tagline: "Deal damage and don't stop."
+tagline: "Deal damage, apply multipliers and eliminate everyone."
 type: Robot
 game: Tokyo
 difficulty: Beginner
