@@ -394,6 +394,28 @@
     #detail::-webkit-scrollbar { width: 6px; }
     #detail::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
+    /* Share Button */
+    .share-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--muted);
+    font-size: 1rem;
+    padding: 0.35rem 0.6rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+  }
+  .share-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .share-btn.copied {
+    border-color: #4caf50;
+    color: #4caf50;
+  }
+
     /* Empty state */
     .empty-state {
       display: flex;
@@ -446,7 +468,6 @@
     .tag.difficulty.Intermediate { background: rgba(255,159,28,0.15); color: var(--text); border: 1px solid rgba(255,159,28,0.3); }
     .tag.difficulty.Advanced     { background: rgba(230,57,70,0.15);  color: var(--text); border: 1px solid rgba(255,159,28,0.3); }
     .tag.style  { background: rgba(228, 215, 29, 0.12); color: #e5e5e5; border: 1px solid rgba(160,100,255,0.3); }
-    {{/*  .tag.type       { background: rgba(255, 159, 28, 0.12); color: #e5e5e5; border: 1px solid rgba(100,180,255,0.3); }  */}}
     .tag.type { display: none; }
 
     /* Stats bars */
@@ -912,7 +933,13 @@
       document.getElementById('loading').style.display = 'none';
       document.getElementById('app').style.display = 'block';
       renderList();
-      setTimeout(() => { initialLoad = false; }, 0);
+      const hash = window.location.hash.replace('#', '');
+      if (hash && allMonsters.find(m => m.id === hash)) {
+        initialLoad = false;
+        selectMonster(hash);
+      } else {
+        setTimeout(() => { initialLoad = false; }, 0);
+      }
     })
     .catch(err => {
       document.getElementById('loading').textContent = '⚠️ Could not load data.json — run build.py first.';
@@ -1011,6 +1038,7 @@
   // ── RENDER DETAIL ──────────────────────────────────────
   function selectMonster(id) {
     activeId = id;
+    history.replaceState(null, '', '#' + id);
     const m = allMonsters.find(x => x.id === id);
     if (!m) return;
 
@@ -1035,8 +1063,13 @@
       <div class="detail-header">
         <div class="detail-icon">${m.icon || '👾'}</div>
         <div>
-          <div class="detail-title">${m.name}</div>
-          <div class="detail-tagline">${m.tagline || ''}</div>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;">
+          <div>
+            <div class="detail-title">${m.name}</div>
+            <div class="detail-tagline">${m.tagline || ''}</div>
+          </div>
+          <button class="share-btn" id="share-btn" title="Copy link">⤴ Share</button>
+        </div>
           <div class="detail-tags">
             <span class="tooltip-wrap">
               <span class="tag difficulty ${m.difficulty || ''}">${m.difficulty || ''}</span>
@@ -1069,7 +1102,22 @@
         requestAnimationFrame(() => bar.style.width = w);
       });
     });
+    
+    const shareBtn = document.getElementById('share-btn');
+    if (shareBtn) {
+      shareBtn.addEventListener('click', () => {
+        const url = window.location.href;
+        navigator.clipboard.writeText(url).then(() => {
+          shareBtn.textContent = '✓ Copied';
+          shareBtn.classList.add('copied');
+          setTimeout(() => {
+            shareBtn.textContent = '⤴ Share';
+            shareBtn.classList.remove('copied');
+          }, 2000);
+        });
+      });
   }
+}
 
   // ── EVENTS ─────────────────────────────────────────────
   document.getElementById('search').addEventListener('input', e => {
@@ -1101,6 +1149,7 @@
   document.getElementById('home-btn').addEventListener('click', e => {
     e.preventDefault();
     activeId = null;
+    history.replaceState(null, '', window.location.pathname);
     initialLoad = true;
     renderList();
     setTimeout(() => { initialLoad = false; }, 0);
