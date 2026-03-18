@@ -16,7 +16,7 @@ stats:
 ---
 
 ## Overview
-An **Intermediate** monster with a **Harvester** and **Collector** playstyle. Alienoid converts damage into energy and turns the card market into a weapon — rewarding patience and board reading over brute force.
+Alienoid converts damage into energy and turns the card market into a weapon — rewarding patience and board reading over brute force.
 
 ## Evolution Cards
 

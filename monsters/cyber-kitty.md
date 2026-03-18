@@ -16,7 +16,7 @@ stats:
 ---
 
 ## Overview
-An **Advanced** monster with a **Disruptor** and **Smasher** playstyle. Cyber Kitty is fragile and high-variance, built around rolling ones to amplify damage and stealing resources directly from opponents — with Nine Lives as a last-resort reset that can win the game from nowhere.
+Cyber Kitty is fragile and high-variance, built around rolling ones to amplify damage and stealing resources directly from opponents — with Nine Lives as a last-resort reset that can win the game from nowhere.
 
 ## Evolution Cards
 

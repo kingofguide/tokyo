@@ -16,7 +16,7 @@ stats:
 ---
 
 ## Overview
-A **Beginner** monster with a **Smasher** and **Disruptor** playstyle. Gigazaur is straightforward to pick up — roll claws, deal damage, occupy Tokyo, and drain VP with passive evolutions that punish anyone who fights back.
+Gigazaur is straightforward to pick up — roll claws, deal damage, occupy Tokyo, and drain VP with passive evolutions that punish anyone who fights back.
 
 ## Evolution Cards
 
@@ -46,7 +46,6 @@ A **Beginner** monster with a **Smasher** and **Disruptor** playstyle. Gigazaur 
 
 ## Tips & Strategies
 
-- Roll as many **claws** as possible in the first two rounds. Health is a resource to spend, not hoard.
 - Get **Gamma Breath** active as fast as possible. A free claw every turn makes damage output completely consistent.
 - Commit fully to eliminating a wounded monster. Partial damage just lets them heal.
 - Hold **Primal Bellow** and **Detachable Tail** for the final push.

@@ -16,7 +16,7 @@ stats:
 ---
 
 ## Overview
-An **Intermediate** monster with a **Smasher** and **Harvester** playstyle. Meka Dragon builds an energy engine, marks targets, and amplifies damage — the more opponents engage, the more dangerous the kit becomes.
+Meka Dragon builds an energy engine, marks targets, and amplifies damage — the more opponents engage, the more dangerous the kit becomes.
 
 ## Evolution Cards
 
@@ -45,7 +45,6 @@ An **Intermediate** monster with a **Smasher** and **Harvester** playstyle. Meka
 *Each monster you make lose HEART with your CLAWS loses 2 extra HEART.*
 
 ## Tips & Strategies
-- Roll **lightning bolts** almost exclusively for the first few turns. The whole kit runs on energy.
 - Get **Target Acquired** active early and mark the most aggressive player immediately.
 - **Programmed to Destroy** makes finishing off weakened monsters a priority. Each kill pays 3 VP and 2 energy.
 - Hold **Mecha Blast** for a turn where multiple opponents are low. The 2 bonus damage per target is devastating at that point.

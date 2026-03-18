@@ -15,7 +15,7 @@ stats:
   speed: 3
 ---
 ## Overview
-An **Intermediate** monster with a **Defender** and **Scorer** playstyle. The King owns Tokyo, stacks VP from multiple sources simultaneously, and has tools to reclaim the throne the moment it's lost — rewarding positional play over raw aggression.
+The King owns Tokyo, stacks VP from multiple sources simultaneously, and has tools to reclaim the throne the moment it's lost — rewarding positional play over raw aggression.
 
 ## Evolution Cards
 

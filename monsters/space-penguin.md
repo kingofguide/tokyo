@@ -16,7 +16,7 @@ stats:
 ---
 
 ## Overview
-An **Advanced** monster with a **Disruptor** and **Collector** playstyle. Space Penguin wins by copying the best tools on the board, freezing opponents' dice, and dismantling everyone else's strategy — requiring deep knowledge of other monsters' evolutions to get the most out of the kit.
+Space Penguin wins by copying the best tools on the board, freezing opponents' dice, and dismantling everyone else's strategy — requiring deep knowledge of other monsters' evolutions to get the most out of the kit.
 
 ## Evolution Cards
 
@@ -47,5 +47,5 @@ An **Advanced** monster with a **Disruptor** and **Collector** playstyle. Space 
 ## Tips & Strategies
 - Scout other monsters' evolutions immediately. **Icy Reflection** is the most valuable card and its ceiling depends entirely on what's available to copy.
 - Roll lightning bolts early. The kit is energy-hungry and reserves are needed for **Encased in Ice** and **Miraculous Catch**.
-- **Blizzard** is the best closer. Locking rerolls and forcing a Tokyo hold means a weak occupant can't escape punishment.
+- **Blizzard** is a great closer. Locking rerolls and forcing a Tokyo hold means a weak occupant can't escape punishment.
 - Watch for **Miraculous Catch** value when the discard pile is full of expensive cards others passed on.
