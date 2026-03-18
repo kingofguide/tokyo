@@ -6,6 +6,7 @@ difficulty: Intermediate
 style:
   - Harvester
   - Collector
+  - Tanker
 type: Alien
 game: Tokyo
 stats:

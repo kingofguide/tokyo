@@ -8,6 +8,7 @@ difficulty: Beginner
 style:
   - Smasher
   - Disruptor
+  - Climber
 stats:
   aggression: 5
   resilience: 4

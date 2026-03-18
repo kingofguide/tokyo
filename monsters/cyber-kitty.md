@@ -6,6 +6,7 @@ difficulty: Advanced
 style:
   - Disruptor
   - Smasher
+  - Scorer
 type: Mutant
 game: Tokyo
 stats:

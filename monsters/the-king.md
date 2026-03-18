@@ -6,6 +6,7 @@ difficulty: Intermediate
 style:
   - Defender
   - Scorer
+  - Tanker
 type: Mutant
 game: Tokyo
 stats:

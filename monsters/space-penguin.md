@@ -6,6 +6,7 @@ difficulty: Advanced
 style:
   - Disruptor
   - Collector
+  - Defender
 type: Alien
 game: Tokyo
 stats:

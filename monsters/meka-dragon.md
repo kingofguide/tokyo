@@ -8,6 +8,7 @@ difficulty: Beginner
 style:
   - Smasher
   - Harvester
+  - Tanker
 stats:
   aggression: 3
   resilience: 3
