@@ -759,7 +759,7 @@
 <div id="app" style="display:none">
   <header>
     <div class="header-inner">
-      <a class="logo" href="#" id="home-btn">King of <span>Tokyo</span> <small style="font-size:0.55em;letter-spacing:0.15em;color:var(--muted)">Monster Guide</small></a>
+      <a class="logo" href="#" id="home-btn">King of <span style="color:var(--accent2)">Tokyo</span> <small style="font-size:0.55em;letter-spacing:0.15em;color:var(--muted)">Monster Guide</small></a>
       <div class="search-wrap">
         <span class="search-icon">🔍</span>
         <input id="search" type="text" placeholder="Search monsters, styles, tips…" autocomplete="off" />
@@ -829,15 +829,12 @@
     <section id="detail">
       <div class="empty-state">
         <div class="big-icon">👑</div>
-        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The Unofficial <br><span style="color:var(--accent)">King of Tokyo Monster Guide</span></h2>
-        <ul style="list-style:none;padding:0;margin:0.5rem 0 1rem;text-align:left;display:flex;flex-direction:column;gap:0.4rem;max-width:420px;">
-          <li>🔍 <strong>Search</strong> by monster name, style, or keyword..</li>
-          <li>🎯 <strong>Filter</strong> by skill level or play style.</li>
-          <li>📖 <strong>Read</strong> each monster's evolution cards and tips.</li>
-          <li>🏷️ <strong>Hover</strong> any skill or style tag to see what it means.</li>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The <br><span style="color:var(--accent)">King of Tokyo</span> <span style="color:var(--accent2)">Monster Guide</span></h2>
+        <ul style="list-style:none;padding:0;margin:0.5rem 0 1rem;text-align:centre;display:flex;flex-direction:column;gap:0.4rem;max-width:420px;">
+          <li>🔍 <strong>Search 🎯 Filter 🔀 Sort</strong> by name, play style or keyword.</li>
+          <li>🏷️ <strong>Hover</strong> skill or style tags to see what it means.</li>
         </ul>
-
-        <p style="color:var(--muted);font-style:italic;">Select a monster to get started.</p>
+        <p style="color:var(--muted);font-style:italic;"><strong>Select a monster or use the filter to get started.</strong></p>
       </div>
     </section>
   </main>
@@ -1040,12 +1037,17 @@
               <span class="tag difficulty ${m.difficulty || ''}">${m.difficulty || ''}</span>
               <span class="tooltip-box">${DIFFICULTY_DEFINITIONS[m.difficulty] || ''}</span>
             </span>
-            ${(Array.isArray(m.style) ? m.style : [m.style]).filter(Boolean).map(p => `
-              <span class="tooltip-wrap">
-                <span class="tag style">${p}</span>
-                <span class="tooltip-box">${STYLE_DEFINITIONS[p] || ''}</span>
-              </span>
-            `).join('')}
+            ${(Array.isArray(m.style) ? m.style : [m.style]).filter(Boolean).map((p, i) => {
+              const ranks = ['Primary', 'Secondary', 'Tertiary', 'Quaternary'];
+              const rank = ranks[i] || `#${i + 1}`;
+              const def = STYLE_DEFINITIONS[p] || '';
+              return `
+                <span class="tooltip-wrap">
+                  <span class="tag style">${p}</span>
+                  <span class="tooltip-box"><strong style="color:var(--accent);margin-right:0.4rem">${rank}</strong><br>${def}</span>
+                </span>
+              `;
+            }).join('')}
             ${m.type ? `<span class="tag type">${m.type}</span>` : ''}
           </div>
         </div>
@@ -1100,15 +1102,12 @@
     document.getElementById('detail').innerHTML = `
       <div class="empty-state">
         <div class="big-icon">👑</div>
-        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The Unofficial <br><span style="color:var(--accent)">King of Tokyo Monster Guide</span></h2>
-        <ul style="list-style:none;padding:0;margin:0.5rem 0 1rem;text-align:left;display:flex;flex-direction:column;gap:0.4rem;max-width:420px;">
-          <li>🔍 <strong>Search</strong> by monster name, style, or keyword..</li>
-          <li>🎯 <strong>Filter</strong> by skill level or play style.</li>
-          <li>📖 <strong>Read</strong> each monster's evolution cards and tips.</li>
-          <li>🏷️ <strong>Hover</strong> any skill or style tag to see what it means.</li>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The <br><span style="color:var(--accent)">King of Tokyo</span> <span style="color:var(--accent2)">Monster Guide</span></h2>
+        <ul style="list-style:none;padding:0;margin:0.5rem 0 1rem;text-align:centre;display:flex;flex-direction:column;gap:0.4rem;max-width:420px;">
+          <li>🔍 <strong>Search 🎯 Filter 🔀 Sort</strong> by name, play style or keyword.</li>
+          <li>🏷️ <strong>Hover</strong> skill or style tags to see what it means.</li>
         </ul>
-
-        <p style="color:var(--muted);font-style:italic;">Select a monster to get started.</p>
+        <p style="color:var(--muted);font-style:italic;"><strong>Select a monster or use the filter to get started.</strong></p>
       </div>
       `;
     });
