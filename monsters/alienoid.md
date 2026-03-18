@@ -1,7 +1,7 @@
 ---
 name: Alienoid
 icon: 👾
-tagline: "Grow energy and gain cards."
+tagline: "Grow energy and gain cards"
 difficulty: Intermediate
 style:
   - Harvester
@@ -9,11 +9,31 @@ style:
   - Tanker
 type: Alien
 game: Tokyo
-stats:
-  aggression: 3
-  resilience: 3
-  energy: 5
-  speed: 4
+evolutions:
+  - name: Superior Alien Technology
+    type: Permanent
+    description: Buy KEEP cards at half cost (rounded up). When you do, place a UFO token on the card. At the start of your turn, roll a die for each KEEP card with a UFO token. Discard any card that rolls a CLAW. Maximum 3 UFO-tokened cards at a time.
+  - name: Mothership Support
+    type: Permanent
+    description: Once per turn, spend 1 ENERGY to gain 1 HEART.
+  - name: Exotic Arms
+    type: Permanent
+    description: Before you roll, place 2 ENERGY on this card. If you roll at least 3 CLAWS, take the energy back and deal 2 extra damage to each monster you wound. If you don't, lose the 2 ENERGY and lose 2 HEART.
+  - name: Funny Looking But Dangerous
+    type: Permanent
+    description: If you roll at least three 2s, every other monster loses 1 HEART.
+  - name: Adapting Technology
+    type: Permanent
+    description: Comes with 3 ALIEN tokens. On your turn, remove a token to discard the 3 face-up Power cards and replace them with 3 new ones. Discarded when all tokens are used.
+  - name: Anger Batteries
+    type: Temporary
+    description: Gain 1 ENERGY for each HEART you lost this turn.
+  - name: Precision Field Support
+    type: Temporary
+    description: Draw Power cards until you reveal a KEEP card costing 4 ENERGY or less. Take it for free and discard the rest.
+  - name: Alien Scourge
+    type: Temporary
+    description: Gain 2 STAR.
 ---
 
 ## Overview

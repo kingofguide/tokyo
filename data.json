@@ -4,7 +4,7 @@
       "id": "alienoid",
       "name": "Alienoid",
       "icon": "\ud83d\udc7e",
-      "tagline": "Grow energy and gain cards.",
+      "tagline": "Grow energy and gain cards",
       "difficulty": "Intermediate",
       "style": [
         "Harvester",
@@ -13,12 +13,9 @@
       ],
       "type": "Alien",
       "game": "Tokyo",
-      "stats": {
-        "aggression": 3,
-        "resilience": 3,
-        "energy": 5,
-        "speed": 4
-      },
+      "evolutions": [
+        "name: Superior Alien Technology"
+      ],
       "content_html": "<h2>Overview</h2>\n<p>Alienoid converts damage into energy and turns the card market into a weapon \u2014 rewarding patience and board reading over brute force.</p>\n<h2>Evolution Cards</h2>\n<h3>Superior Alien Technology <em>(Permanent)</em></h3>\n<p><em>Buy KEEP cards at half cost (rounded up). When you do, place a UFO token on the card. At the start of your turn, roll a die for each KEEP card with a UFO token. Discard any card that rolls a CLAW. Maximum 3 UFO-tokened cards at a time.</em></p>\n<h3>Mothership Support <em>(Permanent)</em></h3>\n<p><em>Once per turn, spend 1 ENERGY to gain 1 HEART.</em></p>\n<h3>Exotic Arms <em>(Permanent)</em></h3>\n<p><em>Before you roll, place 2 ENERGY on this card. If you roll at least 3 CLAWS, take the energy back and deal 2 extra damage to each monster you wound. If you don't, lose the 2 ENERGY and lose 2 HEART.</em></p>\n<h3>Funny Looking But Dangerous <em>(Permanent)</em></h3>\n<p><em>If you roll at least three 2s, every other monster loses 1 HEART.</em></p>\n<h3>Adapting Technology <em>(Permanent)</em></h3>\n<p><em>Comes with 3 ALIEN tokens. On your turn, remove a token to discard the 3 face-up Power cards and replace them with 3 new ones. Discarded when all tokens are used.</em></p>\n<h3>Anger Batteries <em>(Temporary)</em></h3>\n<p><em>Gain 1 ENERGY for each HEART you lost this turn.</em></p>\n<h3>Precision Field Support <em>(Temporary)</em></h3>\n<p><em>Draw Power cards until you reveal a KEEP card costing 4 ENERGY or less. Take it for free and discard the rest.</em></p>\n<h3>Alien Scourge <em>(Temporary)</em></h3>\n<p><em>Gain 2 STAR.</em></p>\n<h2>Tips & Strategies</h2>\n<ul>\n<li>Prioritise lightning bolts over everything else. The entire kit runs on energy.</li>\n<li>Your opening evolution sets the gameplan. <strong>Mothership Support</strong> means lean into sustain. <strong>Superior Alien Technology</strong> means pivot to card buying immediately.</li>\n<li>Hold <strong>Alien Scourge</strong> until you are exactly 2 VP from winning.</li>\n<li><strong>Exotic Arms</strong> is safer to gamble with once you have a large energy buffer built up.</li>\n</ul>"
     },
     {
