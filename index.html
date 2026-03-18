@@ -38,7 +38,7 @@
     /* ── HEADER ─────────────────────────────────────────── */
     header {
       background: linear-gradient(135deg, #1a0e0a 0%, #0d0d12 60%);
-      border-bottom: 1px solid var(--text);
+      border-bottom: 1px solid var(--border);
       padding: 2rem 2rem 1.5rem;
       position: sticky;
       top: 0;
@@ -57,7 +57,7 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 2.2rem;
       letter-spacing: 0.05em;
-      color: var(--accent);
+      color: var(--text);
       text-shadow: 0 0 20px rgba(230,57,70,0.4);
       line-height: 1;
       flex-shrink: 0;
@@ -348,7 +348,7 @@
     .monster-card:hover { background: var(--bg2); }
     .monster-card.active {
       background: var(--bg2);
-      border-left-color: var(--accent);
+      border-left-color: var(--text);
     }
     .monster-icon { font-size: 1.8rem; line-height: 1; flex-shrink: 0; }
     .monster-meta { min-width: 0; }
@@ -374,9 +374,9 @@
       flex-shrink: 0;
       margin-left: auto;
     }
-    .difficulty-dot.Beginner     { background: #4caf50; }
-    .difficulty-dot.Intermediate { background: var(--accent2); }
-    .difficulty-dot.Advanced     { background: var(--accent); }
+    .difficulty-dot.Beginner     { background: #4caf50; opacity: 70%;}
+    .difficulty-dot.Intermediate { background: var(--accent2); opacity: 70%;}
+    .difficulty-dot.Advanced     { background: var(--accent); opacity: 70%;}
 
     .no-results {
       padding: 2rem 1.25rem;
@@ -445,9 +445,9 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
-    .tag.difficulty.Beginner     { background: rgba(76,175,80,0.15);  color: #4caf50; border: 1px solid rgba(76,175,80,0.3); }
-    .tag.difficulty.Intermediate { background: rgba(255,159,28,0.15); color: var(--accent2); border: 1px solid rgba(255,159,28,0.3); }
-    .tag.difficulty.Advanced     { background: rgba(230,57,70,0.15);  color: var(--accent); border: 1px solid rgba(230,57,70,0.3); }
+    .tag.difficulty.Beginner     { background: rgba(76,175,80,0.15);  color: var(--text); border: 1px solid rgba(76,175,80,0.3); }
+    .tag.difficulty.Intermediate { background: rgba(255,159,28,0.15); color: var(--text); border: 1px solid rgba(255,159,28,0.3); }
+    .tag.difficulty.Advanced     { background: rgba(230,57,70,0.15);  color: var(--text); border: 1px solid rgba(255,159,28,0.3); }
     .tag.style  { background: rgba(228, 215, 29, 0.12); color: #e5e5e5; border: 1px solid rgba(160,100,255,0.3); }
     {{/*  .tag.type       { background: rgba(255, 159, 28, 0.12); color: #e5e5e5; border: 1px solid rgba(100,180,255,0.3); }  */}}
     .tag.type { display: none; }
