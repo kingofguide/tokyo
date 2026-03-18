@@ -92,6 +92,21 @@
       font-size: 0.9rem;
       pointer-events: none;
     }
+    #search-clear {
+      position: absolute;
+      right: 0.6rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-size: 0.75rem;
+      cursor: pointer;
+      padding: 0.2rem 0.3rem;
+      line-height: 1;
+      transition: color 0.15s;
+    }
+    #search-clear:hover { color: var(--text); }
 
     /* ── FILTERS ────────────────────────────────────────── */
     .filters {
@@ -692,6 +707,7 @@
       <div class="search-wrap">
         <span class="search-icon">🔍</span>
         <input id="search" type="text" placeholder="Search monsters, styles, tips…" autocomplete="off" />
+        <button id="search-clear" style="display:none">✕</button>
       </div>
       <div class="filters" id="filters">
         
@@ -796,6 +812,7 @@
   let filterDifficulties = [];
   let filterStyles = [];
   let filterGames = [];
+  let initialLoad = true;
 
   // ── TOOL TIP ──────────────────────────────────────────────
   const STYLE_DEFINITIONS = {
@@ -823,6 +840,7 @@
       document.getElementById('loading').style.display = 'none';
       document.getElementById('app').style.display = 'block';
       renderList();
+      initialLoad = false;
     })
     .catch(err => {
       document.getElementById('loading').textContent = '⚠️ Could not load data.json — run build.py first.';
@@ -860,6 +878,15 @@
 
     if (!monsters.length) {
       list.innerHTML = '<div class="no-results">No monsters match your search.</div>';
+      activeId = null;
+      document.getElementById('detail').innerHTML = `
+        <div class="empty-state">
+          <div class="big-icon">🔍</div>
+          <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">No Monsters Found</h2>
+          <p style="color:var(--muted);margin-top:0.5rem;">Try adjusting or clearing your filters to see more results.</p>
+          <p style="color:var(--muted);margin-top:0.5rem;">Can't find a monster? Reach out and let us know:<br><a href="mailto:kingofguide@outlook.com" style="color:var(--accent);text-decoration:none;font-weight:600;">kingofguide[@]outlook[.]com</a></p>
+        </div>
+      `;
       return;
     }
 
@@ -877,6 +904,12 @@
     list.querySelectorAll('.monster-card').forEach(card => {
       card.addEventListener('click', () => selectMonster(card.dataset.id));
     });
+
+    // Auto-select first monster if none active or active is not in filtered list
+    const firstId = monsters[0]?.id;
+    if (firstId && !initialLoad && !monsters.find(m => m.id === activeId)) {
+      selectMonster(firstId);
+    }
   }
 
   // ── RENDER DETAIL ──────────────────────────────────────
@@ -940,7 +973,27 @@
   // ── EVENTS ─────────────────────────────────────────────
   document.getElementById('search').addEventListener('input', e => {
     searchQuery = e.target.value;
+    document.getElementById('search-clear').style.display = searchQuery ? 'block' : 'none';
     renderList();
+    updateClearButton();
+  });
+
+  document.getElementById('search').addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      searchQuery = '';
+      e.target.value = '';
+      document.getElementById('search-clear').style.display = 'none';
+      renderList();
+      updateClearButton();
+    }
+  });
+
+  document.getElementById('search-clear').addEventListener('click', () => {
+    searchQuery = '';
+    document.getElementById('search').value = '';
+    document.getElementById('search-clear').style.display = 'none';
+    renderList();
+    updateClearButton();
   });
 
 
@@ -966,7 +1019,7 @@
 
   function updateClearButton() {
     const btn = document.getElementById('filter-clear');
-    const active = filterDifficulties.length > 0 || filterStyles.length > 0 || filterGames.length > 0;
+    const active = filterDifficulties.length > 0 || filterStyles.length > 0 || filterGames.length > 0 || searchQuery.length > 0;
     if (active) {
       btn.removeAttribute('disabled');
     } else {
@@ -987,6 +1040,9 @@
     gameDropdown.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
     gameToggle.textContent = 'Games';
     gameToggle.classList.remove('active');
+    searchQuery = '';
+    document.getElementById('search').value = '';
+    document.getElementById('search-clear').style.display = 'none';
     document.getElementById('filter-clear').setAttribute('disabled', '');
     renderList();
   });
