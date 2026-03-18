@@ -268,14 +268,70 @@
     #sidebar::-webkit-scrollbar { width: 4px; }
     #sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
+  #monster-count-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.25rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0.5rem;
+  }
+  .sort-wrap {
+    position: relative;
+  }
+  .sort-btn {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.15s;
+    white-space: nowrap;
+  }
+  .sort-btn:hover { color: var(--text); }
+  .sort-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.4rem 0;
+    z-index: 200;
+    min-width: 160px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  }
+  .sort-dropdown.open { display: block; }
+  .sort-option {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 0.4rem 0.85rem;
+    text-align: left;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+  .sort-option:hover { color: var(--text); }
+  .sort-option.active { color: var(--accent); }
+
     .monster-count {
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--muted);
-      padding: 0 1.25rem 0.75rem;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 0.5rem;
     }
 
     .monster-card {
@@ -513,7 +569,7 @@
       font-family: 'Bebas Neue', sans-serif;
       font-size: 0.85rem;
       letter-spacing: 0.15em;
-      color: var(--accent);
+      color: var(--text);
       margin-bottom: 0.6rem;
       text-transform: uppercase;
     }
@@ -636,7 +692,7 @@
           justify-content: left;
           text-align: left;
         }
-        .monster-count { padding: 0 1rem 0.5rem; }
+        #monster-count-wrap { padding: 0 1rem 0.5rem; }
         #monster-list {
           display: flex;
           flex-direction: row;
@@ -754,7 +810,20 @@
 
   <main>
     <nav id="sidebar">
-      <div class="monster-count" id="monster-count"></div>
+      <div class="monster-count" id="monster-count-wrap">
+      <span id="monster-count"></span>
+      <div class="sort-wrap" id="sort-wrap">
+        <button class="sort-btn" id="sort-toggle">A–Z ▾</button>
+        <div class="sort-dropdown" id="sort-dropdown">
+          <button data-sort="name-asc" class="sort-option active">Name: A–Z</button>
+          <button data-sort="name-desc" class="sort-option">Name: Z–A</button>
+          <button data-sort="difficulty-asc" class="sort-option">Skill: Easiest</button>
+          <button data-sort="difficulty-desc" class="sort-option">Skill: Hardest</button>
+          <button data-sort="style" class="sort-option">Style</button>
+          <button data-sort="game" class="sort-option">Game</button>
+        </div>
+      </div>
+    </div>
       <div id="monster-list"></div>
     </nav>
     <section id="detail">
@@ -813,6 +882,7 @@
   let filterStyles = [];
   let filterGames = [];
   let initialLoad = true;
+  let sortOrder = 'name-asc';
 
   // ── TOOL TIP ──────────────────────────────────────────────
   const STYLE_DEFINITIONS = {
@@ -840,7 +910,7 @@
       document.getElementById('loading').style.display = 'none';
       document.getElementById('app').style.display = 'block';
       renderList();
-      initialLoad = false;
+      setTimeout(() => { initialLoad = false; }, 0);
     })
     .catch(err => {
       document.getElementById('loading').textContent = '⚠️ Could not load data.json — run build.py first.';
@@ -849,24 +919,48 @@
 
   // ── FILTER & SEARCH ────────────────────────────────────
   function filteredMonsters() {
-    return allMonsters.filter(m => {
-      const matchDifficulty = filterDifficulties.length === 0 || filterDifficulties.includes(m.difficulty);
-      const styleArr = Array.isArray(m.style) ? m.style : [m.style].filter(Boolean);
-      const matchstyle = filterStyles.length === 0 || filterStyles.every(p => styleArr.includes(p));
-      const gameArr = Array.isArray(m.game) ? m.game : [m.game].filter(Boolean);
-      const matchGame = filterGames.length === 0 || filterGames.some(g => gameArr.includes(g));
-      if (!matchDifficulty || !matchstyle || !matchGame) return false;
-      if (!searchQuery) return true;
-      const q = searchQuery.toLowerCase();
-      const styleStr = styleArr.join(' ');
-      return (
-        m.name?.toLowerCase().includes(q) ||
-        styleStr.toLowerCase().includes(q) ||
-        m.tagline?.toLowerCase().includes(q) ||
-        m.content_html?.toLowerCase().includes(q)
-      );
-    });
-  }
+  const DIFFICULTY_ORDER = { 'Beginner': 1, 'Intermediate': 2, 'Advanced': 3 };
+
+  const filtered = allMonsters.filter(m => {
+    const matchDifficulty = filterDifficulties.length === 0 || filterDifficulties.includes(m.difficulty);
+    const styleArr = Array.isArray(m.style) ? m.style : [m.style].filter(Boolean);
+    const matchstyle = filterStyles.length === 0 || filterStyles.every(p => styleArr.includes(p));
+    const gameArr = Array.isArray(m.game) ? m.game : [m.game].filter(Boolean);
+    const matchGame = filterGames.length === 0 || filterGames.some(g => gameArr.includes(g));
+    if (!matchDifficulty || !matchstyle || !matchGame) return false;
+    if (!searchQuery) return true;
+    const q = searchQuery.toLowerCase();
+    const styleStr = styleArr.join(' ');
+    return (
+      m.name?.toLowerCase().includes(q) ||
+      styleStr.toLowerCase().includes(q) ||
+      m.tagline?.toLowerCase().includes(q) ||
+      m.content_html?.toLowerCase().includes(q)
+    );
+  });
+
+  filtered.sort((a, b) => {
+    switch (sortOrder) {
+      case 'name-asc':  return a.name.localeCompare(b.name);
+      case 'name-desc': return b.name.localeCompare(a.name);
+      case 'difficulty-asc':
+        return (DIFFICULTY_ORDER[a.difficulty] || 99) - (DIFFICULTY_ORDER[b.difficulty] || 99);
+      case 'difficulty-desc':
+        return (DIFFICULTY_ORDER[b.difficulty] || 99) - (DIFFICULTY_ORDER[a.difficulty] || 99);
+      case 'style':
+        const aStyle = Array.isArray(a.style) ? a.style[0] : (a.style || '');
+        const bStyle = Array.isArray(b.style) ? b.style[0] : (b.style || '');
+        return aStyle.localeCompare(bStyle);
+      case 'game':
+        const aGame = Array.isArray(a.game) ? a.game[0] : (a.game || '');
+        const bGame = Array.isArray(b.game) ? b.game[0] : (b.game || '');
+        return aGame.localeCompare(bGame);
+      default: return 0;
+    }
+  });
+
+  return filtered;
+}
 
   // ── RENDER SIDEBAR ─────────────────────────────────────
   function renderList() {
@@ -907,7 +1001,7 @@
 
     // Auto-select first monster if none active or active is not in filtered list
     const firstId = monsters[0]?.id;
-    if (firstId && !initialLoad && !monsters.find(m => m.id === activeId)) {
+    if (firstId && !initialLoad && (!activeId || !monsters.find(m => m.id === activeId))) {
       selectMonster(firstId);
     }
   }
@@ -998,24 +1092,26 @@
 
 
   document.getElementById('home-btn').addEventListener('click', e => {
-  e.preventDefault();
-  activeId = null;
-  renderList();
-  document.getElementById('detail').innerHTML = `
-    <div class="empty-state">
-      <div class="big-icon">👑</div>
-      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The Unofficial <br><span style="color:var(--accent)">King of Tokyo Monster Guide</span></h2>
-      <ul style="list-style:none;padding:0;margin:0.5rem 0 1rem;text-align:left;display:flex;flex-direction:column;gap:0.4rem;max-width:420px;">
-        <li>🔍 <strong>Search</strong> by monster name, style, or keyword..</li>
-        <li>🎯 <strong>Filter</strong> by skill level or play style.</li>
-        <li>📖 <strong>Read</strong> each monster's evolution cards and tips.</li>
-        <li>🏷️ <strong>Hover</strong> any skill or style tag to see what it means.</li>
-      </ul>
+    e.preventDefault();
+    activeId = null;
+    initialLoad = true;
+    renderList();
+    setTimeout(() => { initialLoad = false; }, 0);
+    document.getElementById('detail').innerHTML = `
+      <div class="empty-state">
+        <div class="big-icon">👑</div>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The Unofficial <br><span style="color:var(--accent)">King of Tokyo Monster Guide</span></h2>
+        <ul style="list-style:none;padding:0;margin:0.5rem 0 1rem;text-align:left;display:flex;flex-direction:column;gap:0.4rem;max-width:420px;">
+          <li>🔍 <strong>Search</strong> by monster name, style, or keyword..</li>
+          <li>🎯 <strong>Filter</strong> by skill level or play style.</li>
+          <li>📖 <strong>Read</strong> each monster's evolution cards and tips.</li>
+          <li>🏷️ <strong>Hover</strong> any skill or style tag to see what it means.</li>
+        </ul>
 
-      <p style="color:var(--muted);font-style:italic;">Select a monster to get started.</p>
-    </div>
-    `;
-  });
+        <p style="color:var(--muted);font-style:italic;">Select a monster to get started.</p>
+      </div>
+      `;
+    });
 
   function updateClearButton() {
     const btn = document.getElementById('filter-clear');
@@ -1044,7 +1140,9 @@
     document.getElementById('search').value = '';
     document.getElementById('search-clear').style.display = 'none';
     document.getElementById('filter-clear').setAttribute('disabled', '');
+    initialLoad = true;
     renderList();
+    setTimeout(() => { initialLoad = false; }, 0);
   });
 
   const difficultyToggle = document.getElementById('difficulty-toggle');
@@ -1100,31 +1198,54 @@
     });
   });
 
-  gameDropdown.addEventListener('change', e => {
-    if (e.target.type === 'checkbox') {
-      filterGames = Array.from(
-        gameDropdown.querySelectorAll('input[type="checkbox"]:checked')
-      ).map(cb => cb.value);
-      const count = filterGames.length;
-      gameToggle.textContent = count === 0 ? 'Games' : `${count} Game${count > 1 ? 's' : ''}`;
-      gameToggle.classList.toggle('active', count > 0);
-      renderList();
-      updateClearButton();
+    gameDropdown.addEventListener('change', e => {
+      if (e.target.type === 'checkbox') {
+        filterGames = Array.from(
+          gameDropdown.querySelectorAll('input[type="checkbox"]:checked')
+        ).map(cb => cb.value);
+        const count = filterGames.length;
+        gameToggle.textContent = count === 0 ? 'Games' : `${count} Game${count > 1 ? 's' : ''}`;
+        gameToggle.classList.toggle('active', count > 0);
+        renderList();
+        updateClearButton();
+      }
+    });
+
+    styleDropdown.addEventListener('change', e => {
+      if (e.target.type === 'checkbox') {
+        filterStyles = Array.from(
+          styleDropdown.querySelectorAll('input[type="checkbox"]:checked')
+        ).map(cb => cb.value);
+
+        const count = filterStyles.length;
+        styleToggle.textContent = count === 0 ? 'Styles' : `${count} style${count > 1 ? 's' : ''}`;
+        styleToggle.classList.toggle('active', count > 0);
+        renderList();
+        updateClearButton();
+      }
+    });
+    const sortToggle = document.getElementById('sort-toggle');
+  const sortDropdown = document.getElementById('sort-dropdown');
+
+  sortToggle.addEventListener('click', e => {
+    e.stopPropagation();
+    sortDropdown.classList.toggle('open');
+  });
+
+  document.addEventListener('click', e => {
+    if (!document.getElementById('sort-wrap').contains(e.target)) {
+      sortDropdown.classList.remove('open');
     }
   });
 
-  styleDropdown.addEventListener('change', e => {
-    if (e.target.type === 'checkbox') {
-      filterStyles = Array.from(
-        styleDropdown.querySelectorAll('input[type="checkbox"]:checked')
-      ).map(cb => cb.value);
-
-      const count = filterStyles.length;
-      styleToggle.textContent = count === 0 ? 'Styles' : `${count} style${count > 1 ? 's' : ''}`;
-      styleToggle.classList.toggle('active', count > 0);
-      renderList();
-      updateClearButton();
-    }
+  sortDropdown.addEventListener('click', e => {
+    const btn = e.target.closest('.sort-option');
+    if (!btn) return;
+    sortOrder = btn.dataset.sort;
+    sortDropdown.querySelectorAll('.sort-option').forEach(b => b.classList.toggle('active', b === btn));
+    sortToggle.textContent = btn.textContent + ' ▾';
+    sortDropdown.classList.remove('open');
+    renderList();
   });
 </script>
 </body>
