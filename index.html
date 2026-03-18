@@ -103,6 +103,7 @@
     .filter-select-wrap {
       position: relative;
       flex: 1;
+      white-space: nowrap;
     }
     .filter-select-wrap::after {
       content: '▾';
@@ -138,19 +139,30 @@
     .filter-select option { background: var(--bg3); color: var(--text); }
 
     #filter-clear {
-        padding: 0.25rem 0.35rem;
-        border-radius: 6px;
-        border: 1px solid var(--accent);
-        background: transparent;
-        color: var(--accent);
-        font-family: 'Barlow', sans-serif;
-        font-size: 0.8rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        cursor: pointer;
-        transition: all 0.15s;
-      }
+      padding: 0.25rem 0.35rem;
+      border-radius: 6px;
+      border: 1px solid var(--muted);
+      background: transparent;
+      color: var(--muted);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: not-allowed;
+      transition: all 0.15s;
+      opacity: 0.5;
+    }
+    #filter-clear:not([disabled]) {
+      border-color: var(--accent);
+      color: var(--accent);
+      cursor: pointer;
+      opacity: 1;
+    }
+    #filter-clear:not([disabled]):hover {
+      background: var(--accent);
+      color: #fff;
+    }
       #filter-clear:hover {
         background: var(--accent);
         color: #fff;
@@ -193,6 +205,32 @@
         cursor: pointer;
       }
 
+    /* ── TOOL TIP ────────────────────────────────────── */    
+      .tooltip-wrap {
+        position: relative;
+        display: inline-block;
+      }
+      .tooltip-wrap .tooltip-box {
+        display: none;
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 0.6rem 1rem;
+        font-size: 0.82rem;
+        color: var(--text);
+        white-space: nowrap;
+        z-index: 500;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+        pointer-events: none;
+        letter-spacing: 0.02em;
+      }
+      .tooltip-wrap:hover .tooltip-box {
+        display: block;
+      }
     /* ── MAIN LAYOUT ────────────────────────────────────── */
     main {
       max-width: 1200px;
@@ -657,13 +695,13 @@
       </div>
       <div class="filters" id="filters">
         
-        <div class="filter-select-wrap">
-          <select class="filter-select" id="filter-difficulty">
-            <option value="all">Skills</option>
-            <option value="Beginner">Beginner</option>
-            <option value="Intermediate">Intermediate</option>
-            <option value="Advanced">Advanced</option>
-          </select>
+        <div class="filter-select-wrap" id="difficulty-wrap">
+          <button class="filter-select" id="difficulty-toggle">Skills</button>
+          <div class="checkbox-dropdown" id="difficulty-dropdown">
+            <label><input type="checkbox" value="Beginner"> Beginner</label>
+            <label><input type="checkbox" value="Intermediate"> Intermediate</label>
+            <label><input type="checkbox" value="Advanced"> Advanced</label>
+          </div>
         </div>
         <div class="filter-select-wrap" id="style-wrap">
           <button class="filter-select" id="style-toggle">Styles</button>
@@ -693,7 +731,7 @@
           </div>
         </div>
 
-        <button id="filter-clear" style="display:none">↺</button>
+        <button id="filter-clear" disabled>↺</button>
       </div>
     </div>
   </header>
@@ -707,58 +745,45 @@
       <div class="empty-state">
         <div class="big-icon">👑</div>
         <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The Unofficial <br><span style="color:var(--accent)">King of Tokyo Monster Guide</span></h2>
-        <p style="max-width:400px;">Explore each monster's playstyle via their evolution cards to discover strategies.</p>
-        <ul style="list-style:none;padding:0;margin:1rem 0;text-align:left;display:flex;flex-direction:column;gap:0.4rem;">
-          <li>🔍 <strong>Search</strong> monsters by name, style, or keyword.</li>
-          <li>🎯 <strong>Filter</strong> by skill level to find the right fit.</li>
-          <li>📖 <strong>Select</strong> any monster to read their full guide.</li>
+        <ul style="list-style:none;padding:0;margin:0.5rem 0 1rem;text-align:left;display:flex;flex-direction:column;gap:0.4rem;max-width:420px;">
+          <li>🔍 <strong>Search</strong> by monster name, style, or keyword..</li>
+          <li>🎯 <strong>Filter</strong> by skill level or play style.</li>
+          <li>📖 <strong>Read</strong> each monster's evolution cards and tips.</li>
+          <li>🏷️ <strong>Hover</strong> any skill or style tag to see what it means.</li>
         </ul>
-        <p style="color:var(--muted);font-style:italic;margin-top:0.5rem;">Select a monster to get started.</p>
+
+        <p style="color:var(--muted);font-style:italic;">Select a monster to get started.</p>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="footer-inner">
+  <div class="footer-inner">
 
-      <div class="footer-section">
-        <h4 style="margin-top:0.9rem">Contribute</h4>
-        <p>This guide is open source and community driven. Found an error, want to add a monster, or improve a guide? <br><a href="https://github.com/kingofguide/tokyo" target="_blank" style="color:var(--text);text-decoration:none;font-weight:600;">View on GitHub →</a></p>
-        <h4 style="margin-top:0.9rem">Difficulty</h4>
-        <ul>
-          <li><span class="footer-key">Beginner</span><span>— Playable your first game</span></li>
-          <li><span class="footer-key">Intermediate</span><span>— Takes ~2 games to click</span></li>
-          <li><span class="footer-key">Advanced</span><span>— Takes ~3+ games to master</span></li>
-        </ul>
-      </div>
-
-      <div class="footer-divider"></div>
-
-      <div class="footer-section">
-        <h4>Styles</h4>
-        <ul class="footer-styles">
-          <li><span class="footer-key">Scorer</span><span>Points-focused</span></li>
-          <li><span class="footer-key">Smasher</span><span>Damage-focused</span></li>
-          <li><span class="footer-key">Harvester</span><span>Energy-focused</span></li>
-          <li><span class="footer-key">Defender</span><span>Tokyo control</span></li>
-          <li><span class="footer-key">Disruptor</span><span>Interferes with plays</span></li>
-          <li><span class="footer-key">Collector</span><span>Card-focused</span></li>
-          <li><span class="footer-key">Tanker</span><span>Healing &amp; durability</span></li>
-          <li><span class="footer-key">Climber</span><span>VP ladder-focused</span></li>
-        </ul>
-      </div>
-
-      <div class="footer-divider"></div>
-
-      <div class="footer-section">
-        <h4>About</h4>
-        <p>A fan-made guide for <em>King of Tokyo</em> monsters. Stats and style ratings are community-assessed, not official values.</p>
-        <p style="margin-top:0.5rem">Guide content and code was generated with the assistance of AI. All content is reviewed and curated by the site's author.</p>
-        <p style="margin-top:0.5rem">King of Tokyo is designed by Richard Garfield and published by IELLO.</p>
-        <p style="margin-top:0.5rem">© 2025 King of Guide. All rights reserved.</p>
-      </div>
-
+    <div class="footer-section">
+      <h4>Contribute</h4>
+      <p>This guide is open source and community driven. Found an error, want to add a monster, or improve a guide?</p>
+      <p style="margin-top:0.5rem"><a href="https://github.com/kingofguide/tokyo" target="_blank" style="color:var(--accent);text-decoration:none;font-weight:600;">View on GitHub →</a></p>
+      <p style="margin-top:0.5rem">Note: This is an unofficial fan-made guide. Content and code generated with the assistance of AI, reviewed and curated by the author(s).</p>
     </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-section">
+      <h4>Disclaimer</h4>
+      <p>Skill levels and play styles are subjective and based on community opinion — your experience may vary depending on your group, playstyle, and familiarity with the game.</p>
+      <p style="margin-top:0.5rem">Have a different take? We'd love to hear it at <a href="mailto:kingofguide@outlook.com" style="color:var(--accent);text-decoration:none;font-weight:600;">kingofguide[@]outlook[.]com</a></p>
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-section">
+      <h4>About</h4>
+      <p>King of Tokyo is a dice-rolling board game designed by Richard Garfield and published by IELLO, where monsters battle for control of Tokyo.</p>
+      <p style="margin-top:0.5rem">© 2026 King of Guide. All rights reserved.</p>
+    </div>
+
+  </div>
   </footer>
 
 </div>
@@ -768,9 +793,27 @@
   let allMonsters = [];
   let activeId    = null;
   let searchQuery = '';
-  let filterDifficulty = 'all';
+  let filterDifficulties = [];
   let filterStyles = [];
   let filterGames = [];
+
+  // ── TOOL TIP ──────────────────────────────────────────────
+  const STYLE_DEFINITIONS = {
+    'Scorer':    'Points-focused — races to 20 VP',
+    'Smasher':   'Damage-focused — eliminates opponents',
+    'Harvester': 'Energy-focused — builds a card engine',
+    'Defender':  'Tokyo control — holds position for VP',
+    'Disruptor': 'Interferes with other players\' plans',
+    'Collector': 'Card-focused — builds powerful combos',
+    'Tanker':    'Healing & durability — hard to eliminate',
+    'Climber':   'ladder-focused — climbs wickedness points',
+  };
+
+  const DIFFICULTY_DEFINITIONS = {
+    'Beginner':     'Playable your first game',
+    'Intermediate': 'Takes a couple of games',
+    'Advanced':     'Takes a few games',
+  };
 
   // ── FETCH DATA ─────────────────────────────────────────
   fetch('data.json')
@@ -789,7 +832,7 @@
   // ── FILTER & SEARCH ────────────────────────────────────
   function filteredMonsters() {
     return allMonsters.filter(m => {
-      const matchDifficulty = filterDifficulty === 'all' || m.difficulty === filterDifficulty;
+      const matchDifficulty = filterDifficulties.length === 0 || filterDifficulties.includes(m.difficulty);
       const styleArr = Array.isArray(m.style) ? m.style : [m.style].filter(Boolean);
       const matchstyle = filterStyles.length === 0 || filterStyles.every(p => styleArr.includes(p));
       const gameArr = Array.isArray(m.game) ? m.game : [m.game].filter(Boolean);
@@ -866,8 +909,16 @@
           <div class="detail-title">${m.name}</div>
           <div class="detail-tagline">${m.tagline || ''}</div>
           <div class="detail-tags">
-            <span class="tag difficulty ${m.difficulty || ''}">${m.difficulty || ''}</span>
-            ${(Array.isArray(m.style) ? m.style : [m.style]).filter(Boolean).map(p => `<span class="tag style">${p}</span>`).join('')}
+            <span class="tooltip-wrap">
+              <span class="tag difficulty ${m.difficulty || ''}">${m.difficulty || ''}</span>
+              <span class="tooltip-box">${DIFFICULTY_DEFINITIONS[m.difficulty] || ''}</span>
+            </span>
+            ${(Array.isArray(m.style) ? m.style : [m.style]).filter(Boolean).map(p => `
+              <span class="tooltip-wrap">
+                <span class="tag style">${p}</span>
+                <span class="tooltip-box">${STYLE_DEFINITIONS[p] || ''}</span>
+              </span>
+            `).join('')}
             ${m.type ? `<span class="tag type">${m.type}</span>` : ''}
           </div>
         </div>
@@ -901,28 +952,34 @@
     <div class="empty-state">
       <div class="big-icon">👑</div>
       <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The Unofficial <br><span style="color:var(--accent)">King of Tokyo Monster Guide</span></h2>
-      <p style="max-width:400px;">Explore each monster's playstyle via their evolution cards to discover strategies.</p>
-      <ul style="list-style:none;padding:0;margin:1rem 0;text-align:left;display:flex;flex-direction:column;gap:0.4rem;">
-        <li>🔍 <strong>Search</strong> monsters by name, style, or keyword.</li>
-        <li>🎯 <strong>Filter</strong> by skill level to find the right fit.</li>
-        <li>📖 <strong>Select</strong> any monster to read their full guide.</li>
+      <ul style="list-style:none;padding:0;margin:0.5rem 0 1rem;text-align:left;display:flex;flex-direction:column;gap:0.4rem;max-width:420px;">
+        <li>🔍 <strong>Search</strong> by monster name, style, or keyword..</li>
+        <li>🎯 <strong>Filter</strong> by skill level or play style.</li>
+        <li>📖 <strong>Read</strong> each monster's evolution cards and tips.</li>
+        <li>🏷️ <strong>Hover</strong> any skill or style tag to see what it means.</li>
       </ul>
-      <p style="color:var(--muted);font-style:italic;margin-top:0.5rem;">Select a monster to get started.</p>
+
+      <p style="color:var(--muted);font-style:italic;">Select a monster to get started.</p>
     </div>
     `;
   });
 
   function updateClearButton() {
-  const btn = document.getElementById('filter-clear');
-  const active = filterDifficulty !== 'all' || filterStyles.length > 0 || filterGames.length > 0;
-  btn.style.display = active ? 'block' : 'none';
+    const btn = document.getElementById('filter-clear');
+    const active = filterDifficulties.length > 0 || filterStyles.length > 0 || filterGames.length > 0;
+    if (active) {
+      btn.removeAttribute('disabled');
+    } else {
+      btn.setAttribute('disabled', '');
+    }
   }
 
   document.getElementById('filter-clear').addEventListener('click', () => {
-    filterDifficulty = 'all';
+    filterDifficulties = [];
+    difficultyDropdown.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+    difficultyToggle.textContent = 'Skills';
+    difficultyToggle.classList.remove('active');
     filterStyles = [];
-    document.getElementById('filter-difficulty').value = 'all';
-    document.getElementById('filter-difficulty').classList.remove('active');
     styleDropdown.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
     styleToggle.textContent = 'Styles';
     styleToggle.classList.remove('active');
@@ -930,56 +987,75 @@
     gameDropdown.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
     gameToggle.textContent = 'Games';
     gameToggle.classList.remove('active');
-    document.getElementById('filter-clear').style.display = 'none';
+    document.getElementById('filter-clear').setAttribute('disabled', '');
     renderList();
   });
 
-  document.getElementById('filter-difficulty').addEventListener('change', e => {
-    filterDifficulty = e.target.value;
-    e.target.classList.toggle('active', filterDifficulty !== 'all');
-    renderList();
-    updateClearButton();
+  const difficultyToggle = document.getElementById('difficulty-toggle');
+  const difficultyDropdown = document.getElementById('difficulty-dropdown');
+
+  difficultyDropdown.addEventListener('change', e => {
+    if (e.target.type === 'checkbox') {
+      filterDifficulties = Array.from(
+        difficultyDropdown.querySelectorAll('input[type="checkbox"]:checked')
+      ).map(cb => cb.value);
+      const count = filterDifficulties.length;
+      difficultyToggle.textContent = count === 0 ? 'Skills' : `${count} Skill${count > 1 ? 's' : ''}`;
+      difficultyToggle.classList.toggle('active', count > 0);
+      renderList();
+      updateClearButton();
+    }
   });
 
-const styleToggle = document.getElementById('style-toggle');
-const styleDropdown = document.getElementById('style-dropdown');
+  const styleToggle = document.getElementById('style-toggle');
+  const styleDropdown = document.getElementById('style-dropdown');
 
-styleToggle.addEventListener('click', e => {
-  e.stopPropagation();
-  styleDropdown.classList.toggle('open');
+  const gameToggle = document.getElementById('game-toggle');
+  const gameDropdown = document.getElementById('game-dropdown');
+
+  difficultyToggle.addEventListener('click', e => {
+    e.stopPropagation();
+    difficultyDropdown.classList.toggle('open');
+    styleDropdown.classList.remove('open');
+    gameDropdown.classList.remove('open');
+  });
+
+  styleToggle.addEventListener('click', e => {
+    e.stopPropagation();
+    styleDropdown.classList.toggle('open');
+    difficultyDropdown.classList.remove('open');
+    gameDropdown.classList.remove('open');
+  });
+
+  gameToggle.addEventListener('click', e => {
+    e.stopPropagation();
+    gameDropdown.classList.toggle('open');
+    difficultyDropdown.classList.remove('open');
+    styleDropdown.classList.remove('open');
   });
 
   document.addEventListener('click', e => {
-    if (!document.getElementById('style-wrap').contains(e.target)) {
-      styleDropdown.classList.remove('open');
+    const wraps = ['difficulty-wrap', 'style-wrap', 'game-wrap'];
+    wraps.forEach(id => {
+      const wrap = document.getElementById(id);
+      if (!wrap.contains(e.target)) {
+        wrap.querySelector('.checkbox-dropdown').classList.remove('open');
+      }
+    });
+  });
+
+  gameDropdown.addEventListener('change', e => {
+    if (e.target.type === 'checkbox') {
+      filterGames = Array.from(
+        gameDropdown.querySelectorAll('input[type="checkbox"]:checked')
+      ).map(cb => cb.value);
+      const count = filterGames.length;
+      gameToggle.textContent = count === 0 ? 'Games' : `${count} Game${count > 1 ? 's' : ''}`;
+      gameToggle.classList.toggle('active', count > 0);
+      renderList();
+      updateClearButton();
     }
   });
-  const gameToggle = document.getElementById('game-toggle');
-const gameDropdown = document.getElementById('game-dropdown');
-
-gameToggle.addEventListener('click', e => {
-  e.stopPropagation();
-  gameDropdown.classList.toggle('open');
-});
-
-document.addEventListener('click', e => {
-  if (!document.getElementById('game-wrap').contains(e.target)) {
-    gameDropdown.classList.remove('open');
-  }
-});
-
-gameDropdown.addEventListener('change', e => {
-  if (e.target.type === 'checkbox') {
-    filterGames = Array.from(
-      gameDropdown.querySelectorAll('input[type="checkbox"]:checked')
-    ).map(cb => cb.value);
-    const count = filterGames.length;
-    gameToggle.textContent = count === 0 ? 'Games' : `${count} Game${count > 1 ? 's' : ''}`;
-    gameToggle.classList.toggle('active', count > 0);
-    renderList();
-    updateClearButton();
-  }
-});
 
   styleDropdown.addEventListener('change', e => {
     if (e.target.type === 'checkbox') {
