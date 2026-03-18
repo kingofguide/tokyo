@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>King of Guide — Tokyo Monsters</title>
+  <title>King of Tokyo — Monster Guide</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <style>
@@ -389,7 +389,7 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--accent);
+      color: var(--accent2);
       margin: 1.5rem 0 0.5rem;
     }
     .detail-content p { margin-bottom: 0.9rem; }
@@ -650,7 +650,7 @@
 <div id="app" style="display:none">
   <header>
     <div class="header-inner">
-      <a class="logo" href="#" id="home-btn">King of <span>Guide</span> <small style="font-size:0.55em;letter-spacing:0.15em;color:var(--muted)"><span style="color:var(--accent);opacity:80%">Tokyo</span> Monsters</small></a>
+      <a class="logo" href="#" id="home-btn">King of <span>Tokyo</span> <small style="font-size:0.55em;letter-spacing:0.15em;color:var(--muted)">Monster Guide</small></a>
       <div class="search-wrap">
         <span class="search-icon">🔍</span>
         <input id="search" type="text" placeholder="Search monsters, styles, tips…" autocomplete="off" />
@@ -706,12 +706,11 @@
     <section id="detail">
       <div class="empty-state">
         <div class="big-icon">👑</div>
-        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The <br><span style="color:var(--accent)">King of Tokyo Monster Guide</span></h2>
-        <p style="font-style:italic;color:var(--muted);margin-bottom:1.25rem;">Your companion for mastering every monster in King of Tokyo.</p>
-        <p style="max-width:400px;">Use this guide to explore each monster's style, evolution cards, strengths, and strategies — whether you're picking up a monster for the first time or looking to sharpen your game.</p>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The Unofficial <br><span style="color:var(--accent)">King of Tokyo Monster Guide</span></h2>
+        <p style="max-width:400px;">Explore each monster's playstyle via their evolution cards to discover strategies.</p>
         <ul style="list-style:none;padding:0;margin:1rem 0;text-align:left;display:flex;flex-direction:column;gap:0.4rem;">
           <li>🔍 <strong>Search</strong> monsters by name, style, or keyword.</li>
-          <li>🎯 <strong>Filter</strong> by difficulty to find the right fit.</li>
+          <li>🎯 <strong>Filter</strong> by skill level to find the right fit.</li>
           <li>📖 <strong>Select</strong> any monster to read their full guide.</li>
         </ul>
         <p style="color:var(--muted);font-style:italic;margin-top:0.5rem;">Select a monster to get started.</p>
@@ -899,14 +898,12 @@
   activeId = null;
   renderList();
   document.getElementById('detail').innerHTML = `
-      <div class="empty-state">
         <div class="big-icon">👑</div>
-        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The <br><span style="color:var(--accent)">King of Tokyo Monster Guide</span></h2>
-        <p style="font-style:italic;color:var(--muted);margin-bottom:1.25rem;">Your companion for mastering every monster in King of Tokyo.</p>
-        <p style="max-width:400px;">Use this guide to explore each monster's style, evolution cards, strengths, and strategies — whether you're picking up a monster for the first time or looking to sharpen your game.</p>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The Unofficial <br><span style="color:var(--accent)">King of Tokyo Monster Guide</span></h2>
+        <p style="max-width:400px;">Explore each monster's playstyle via their evolution cards to discover strategies.</p>
         <ul style="list-style:none;padding:0;margin:1rem 0;text-align:left;display:flex;flex-direction:column;gap:0.4rem;">
           <li>🔍 <strong>Search</strong> monsters by name, style, or keyword.</li>
-          <li>🎯 <strong>Filter</strong> by difficulty to find the right fit.</li>
+          <li>🎯 <strong>Filter</strong> by skill level to find the right fit.</li>
           <li>📖 <strong>Select</strong> any monster to read their full guide.</li>
         </ul>
         <p style="color:var(--muted);font-style:italic;margin-top:0.5rem;">Select a monster to get started.</p>
