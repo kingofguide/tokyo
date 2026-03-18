@@ -898,16 +898,17 @@
   activeId = null;
   renderList();
   document.getElementById('detail').innerHTML = `
-        <div class="big-icon">👑</div>
-        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The Unofficial <br><span style="color:var(--accent)">King of Tokyo Monster Guide</span></h2>
-        <p style="max-width:400px;">Explore each monster's playstyle via their evolution cards to discover strategies.</p>
-        <ul style="list-style:none;padding:0;margin:1rem 0;text-align:left;display:flex;flex-direction:column;gap:0.4rem;">
-          <li>🔍 <strong>Search</strong> monsters by name, style, or keyword.</li>
-          <li>🎯 <strong>Filter</strong> by skill level to find the right fit.</li>
-          <li>📖 <strong>Select</strong> any monster to read their full guide.</li>
-        </ul>
-        <p style="color:var(--muted);font-style:italic;margin-top:0.5rem;">Select a monster to get started.</p>
-      </div>
+    <div class="empty-state">
+      <div class="big-icon">👑</div>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.05em;color:var(--text);margin-bottom:0.25rem;">Welcome To The Unofficial <br><span style="color:var(--accent)">King of Tokyo Monster Guide</span></h2>
+      <p style="max-width:400px;">Explore each monster's playstyle via their evolution cards to discover strategies.</p>
+      <ul style="list-style:none;padding:0;margin:1rem 0;text-align:left;display:flex;flex-direction:column;gap:0.4rem;">
+        <li>🔍 <strong>Search</strong> monsters by name, style, or keyword.</li>
+        <li>🎯 <strong>Filter</strong> by skill level to find the right fit.</li>
+        <li>📖 <strong>Select</strong> any monster to read their full guide.</li>
+      </ul>
+      <p style="color:var(--muted);font-style:italic;margin-top:0.5rem;">Select a monster to get started.</p>
+    </div>
     `;
   });
 
